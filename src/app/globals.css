@@ -2,10 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --cs-background: #0e1022;
+  --cs-primary: #fff;
+  --cs-secondary: #19abff;
+  --cs-accent: #152847;
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,17 +25,80 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--cs-primary);
+  background: var(--cs-background);
+
+  letter-spacing: 4px; /* universal letter spacing */
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* section padding */
+#main-page section {
+  /* margin: 25vh 2vw; */
+  @apply min-h-screen mx-10
+}
+
+h1 {
+  color: var(--cs-primary);
+}
+
+h2 {
+  margin-bottom: 10px;
+  color: var(--cs-secondary);
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+/* text emphasis */
+.emphasis {
+  color: var(--cs-secondary);
+}
+
+/* glow border effect */
+.glow-border::after, .glow-border::before  {
+  content: '';
+  position: absolute;
+  height: 101%;
+  width: 102%;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: 0;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 0.375rem;
+  background-image: conic-gradient(from var(--angle), transparent 70%, var(--cs-secondary));
+  animation: spin 10s linear infinite ;
+}
+
+@keyframes spin {
+  from{
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+
+
+.glow-border::before {
+  filter: blur(1.5rem);
+  opacity: 0.7;
+}
+
+.gr-alt:nth-child(odd) {
+  @apply col-start-2 col-span-1;
+}
+
+.gr-alt:nth-child(even) {
+  @apply col-start-3 col-span-1;
+}
+
+.gr-alt:nth-child(2) {
+  @apply row-start-2;
 }
