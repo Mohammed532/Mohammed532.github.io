@@ -27,6 +27,7 @@ export default function Home() {
         }
     }, [inView])
 
+
     // handler function for showing toast
     let handleToast = (t: number) => {
         const DELAY = 4
