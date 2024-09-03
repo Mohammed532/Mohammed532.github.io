@@ -40,7 +40,7 @@ export default function Toast({ text, delay, duration, showFn }: ToastProp){
     if (!showToast) {return <></>}
 
     return (
-        <motion.div className="toast"
+        <motion.div className="toast z-50"
          initial={{ opacity: 0, x: 100 }}
          animate={{ opacity: [0, 1, 1, 0], x:[100, 0, 0, 100] }}
          transition={{ delay: de, duration: du, times:[0, 0.1, 0.99, 1] }}>

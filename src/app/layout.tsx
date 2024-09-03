@@ -3,8 +3,12 @@ import { space_mono } from "@/styles/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Mohammed Akinbayo",
+  title: {
+    template: "Mohammed Akinbayo | %s",
+    default: "Mohammed Akinbayo"
+  },
   description: "Portfolio site for Mohammed Akinbayo",
+  keywords: ['Portfolio', 'Computer Science', 'Howard University', 'Javascript', 'Robotics', 'Hackathon'],
 };
 
 export default function RootLayout({

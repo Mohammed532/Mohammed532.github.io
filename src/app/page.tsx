@@ -96,7 +96,7 @@ export default function Home() {
                 <Timeline experience={experience} />
             </section>
             <section>
-                <h2 className="text-center">Projects</h2>
+                <h2 className="text-center py-5">Projects</h2>
                 <div className="grid grid-cols-1 justify-center gap-10 md:grid-cols-2">
                     <div className="flex flex-col justify-self-center md:justify-self-end gap-10">
                         {/* TODO: convert to grid layout, no need to split data anymore */}

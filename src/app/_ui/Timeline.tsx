@@ -31,9 +31,9 @@ type TimelineItemProp = {
 }
 
 export default function Timeline({experience}: TimelineProp) {
-    const [selectedId, setSelectedId] = useState<string | null>(null);
+    const [selectedId, setSelectedId] = useState<string[]>([]);
     const [scope, animate] = useAnimate();
-    let {width, height} = useWindowDimensions()
+    let {width} = useWindowDimensions()
 
     // ANIMATION CONSTANTS
     const EXP_MARGIN = '-900%'
@@ -51,40 +51,25 @@ export default function Timeline({experience}: TimelineProp) {
             {open: {marginRight: '0%'}, close: {marginRight: SKILL_MARGIN}}
         ]
         
-        if (selectedId) {
-            // close animation
+        if (!selectedId.includes(id)){
+            //open animation
             sequence = [
-                [`#s-${selectedId}`, skill_side[parseInt(selectedId)%2].close, {type: 'spring', duration: 0.3}],
-                [`#exp-${selectedId}`, { marginTop: EXP_MARGIN }, {type: 'spring', duration: 0.3 }]
+                [`#exp-${id}`, { marginTop: '0%' }, {type: 'spring', duration: 1, bounce: 0.2}],
+                [`#s-${id}`, skill_side[parseInt(id)%2].open, {type: 'spring', duration: 1, bounce: 0.2}]
             ]
             animate(sequence)
-
-            if (id === selectedId) {
-                setSelectedId(null)
-                
-            } else {
-                // open animation
-                sequence = sequence.concat([
-                    [`#exp-${id}`, { marginTop: '0%' }, {type: 'spring', duration: 1}],
-                    [`#s-${id}`, skill_side[parseInt(id)%2].open, {type: 'spring', duration: 1}]
-                ])
-                console.log(sequence);
-                
-                animate(sequence)
-                setSelectedId(id)
-            }
+            setSelectedId(prev => [...prev, id])
         } else {
-            // open animation
-            sequence = ([
-                [`#exp-${id}`, { marginTop: '0%' }, {type: 'spring', duration: 0.7}],
-                [`#s-${id}`, skill_side[parseInt(id)%2].open, {type: 'spring', duration: 0.7}]
-            ])
+            // close animation
+            sequence = [
+                [`#s-${id}`, skill_side[parseInt(id)%2].close, {type: 'spring', duration: 0.3}],
+                [`#exp-${id}`, { marginTop: EXP_MARGIN }, {type: 'spring', duration: 0.3 }]
+            ]
             animate(sequence)
-            setSelectedId(id)
+            setSelectedId(prev => prev.filter(pid => pid !== id))
         }
+
     }
-
-
 
     return(
         <ul ref={scope} className={`timeline timeline-snap-icon max-md:timeline-compact timeline-vertical`}>
