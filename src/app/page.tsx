@@ -25,7 +25,7 @@ export default function Home() {
         if (inView){
             animate('div', { opacity: 1 }, {delay: stagger(0.15)})
         }
-    }, [inView])
+    }, [inView, animate])
 
 
     // handler function for showing toast
@@ -51,7 +51,7 @@ export default function Home() {
                 <div className="flex flex-col items-center px-22 md:basis-1/2">
                     <ReactSVG src="./portfolio-molybdenum.svg" className="min-h-[300px] w-[300px] md:min-h-[400px] md:w-[400px]" />
                     <p className="md:w-full md:text-lg">Hehe, get it? <span className="emphasis">Mo?</span> Like the <span className="emphasis">Element?</span></p>
-                    <p className="md:w-full md:text-lg">Anyways here's my contact info</p>
+                    <p className="md:w-full md:text-lg">Anyways here&apos;s my contact info</p>
                     <div className="md:w-full divider divider-accent"></div>
                     <ContactList contacts={{
                         LinkedIn: 'https://www.linkedin.com/in/mohammed-akinbayo/',
@@ -71,13 +71,13 @@ export default function Home() {
                 </div>
                 <div className="md:w-1/3 md:mx-10">
                     <h2>About Me</h2>
-                    <p>I'm a <span className="emphasis">Howard University</span> student, 
+                    <p>I&apos;m a <span className="emphasis">Howard University</span> student, 
                         working towards my B.S. in Computer Engineering. I have a wide 
                         arrange of interests, including <span className="emphasis">AI/ML</span>, 
                         <span className="emphasis">Frontend Developement</span>, <span className="empasis">IoT</span> 
                         , <span className="emphasis">Robotics</span>, and much more. I have used my skills and interests to 
                         do exceptional work at <span className="emphasis">NASA</span>, <span className="emphasis">Apple</span>, 
-                        and <span className="emphasis">CoStar Group</span>. I'm hoping to 
+                        and <span className="emphasis">CoStar Group</span>. I&apos;m hoping to 
                         grow my skills and continue my learning. I believe that the pursuit of 
                         knowledge is a lifelong journey, so please let me show you the 
                         fruits of that journey!

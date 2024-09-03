@@ -76,11 +76,11 @@ export default function Timeline({experience}: TimelineProp) {
             {experience.map((exp, idx) => {
                 if(width >= MD_WIDTH){
                     return (
-                        <TimelineFullItem exp={exp} idx={idx} alternate={!!(idx%2)} clickItemHandler={selectItem} animation_margins={{EXP_MARGIN: EXP_MARGIN, SKILL_MARGIN: SKILL_MARGIN}}/>
+                        <TimelineFullItem key={idx} exp={exp} idx={idx} alternate={!!(idx%2)} clickItemHandler={selectItem} animation_margins={{EXP_MARGIN: EXP_MARGIN, SKILL_MARGIN: SKILL_MARGIN}}/>
                     )
                 } else {
                     return (
-                        <TimelineCompactItem exp={exp} idx={idx} alternate={!!(idx%2)} clickItemHandler={selectItem} animation_margins={{EXP_MARGIN: EXP_MARGIN, SKILL_MARGIN: SKILL_MARGIN}}/>
+                        <TimelineCompactItem key={(idx)} exp={exp} idx={idx} alternate={!!(idx%2)} clickItemHandler={selectItem} animation_margins={{EXP_MARGIN: EXP_MARGIN, SKILL_MARGIN: SKILL_MARGIN}}/>
                     )
                 }
             })}

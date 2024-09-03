@@ -32,7 +32,7 @@ export default function Toast({ text, delay, duration, showFn }: ToastProp){
     useEffect(() => {
         toastIntervalSetup()
         return () => clearInterval(interval)
-    }, [time])
+    })
 
     let de = delay ? delay : 1
     let du = duration ? duration : 10
