@@ -64,7 +64,7 @@ export default function Home() {
             <section className="flex py-10 flex-col justify-center content-center items-center md:flex-row">
                 <div className="my-10 relative glow-border z-[1] mx-10 ">
                     <img 
-                    src='/portfolio-headshot.jpg' 
+                    src='portfolio-headshot.jpg' 
                     alt="Headshot of Mohammed Akinbayo. And yes, he is quite good looking" 
                     width={256} height={256}
                     className="shadow-xl rounded-md relative z-[1]"/>
