@@ -71,6 +71,18 @@ const projects = [
         description: 'Designed a mental health app for the Black Venture Capital Consortium.',
         skills: ['Figma', 'UI/UX', 'React', 'Firebase'],
     },
+    {
+        img: 'project-imgs/get_it_done_project.png',
+        title: 'Get It Done',
+        description: 'First complete React project. Was completed for the Hack Quarantine Hackathon',
+        skills: ['Figma', 'UI/UX', 'React', 'Firebase'],
+    },
+    {
+        img: 'project-imgs/Proficio.png',
+        title: 'Proficio AI',
+        description: 'Worked with a team for MLH HooHacks 2024 hackathon. Was the winners of the education track.',
+        skills: ['React', 'AWS', 'Whisper/GPT-4', 'AI/ML'],
+    },
 ]
 
 export { skillList, experience, projects }
