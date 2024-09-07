@@ -9,6 +9,7 @@ import Footer from "./footer"
 import Toast from "./_ui/Toast"
 import Timeline from "./_ui/Timeline"
 import ContactList from "./_ui/ContactList"
+import ProjectGrid from "./_ui/ProjectGrid"
 
 export default function Home() {
     // for skill list animation
@@ -17,9 +18,6 @@ export default function Home() {
 
     // toast animation
     const { scrollY } = useScroll()
-
-    let p_col_1 = projects.slice(0, Math.ceil(projects.length / 2)) 
-    let p_col_2 = projects.slice(Math.ceil(projects.length / 2))
 
     useEffect(() => {
         if (inView){
@@ -98,49 +96,7 @@ export default function Home() {
             </section>
             <section>
                 <h2 className="text-center py-5">Projects</h2>
-                <div className="grid grid-cols-1 justify-center gap-10 md:grid-cols-2">
-                    <div className="flex flex-col justify-self-center md:justify-self-end gap-10">
-                        {/* TODO: convert to grid layout, no need to split data anymore */}
-                        {p_col_1.map((p, idx) => (
-                        <motion.div className="card bg-accent shadow-xl max-w-96" key={idx}
-                         initial={{ opacity: 0, x: -200 }}
-                         whileInView={{ opacity: 1, x: 0 }}
-                         transition={{ duration: 0.6 }}
-                         viewport={{ margin: '99999px 0px 0px -80px' }}>
-                            <figure>
-                                <img src={p.img} alt={`Image of project ${p.title}`} />
-                            </figure>
-                            <div className="card-body">
-                                <h2 className="class-title text-white">{p.title}</h2>
-                                <p>{p.description}</p>
-                                <div className="card-actions justify-end">
-                                    {p.skills.map((s, idx) => (<div className="badge badge-[--cs-background] p-3" key={`ps-${idx}`}>{s}</div>))}
-                                </div>
-                            </div>
-                        </motion.div>
-                        ))}
-                    </div>
-                    <div className="flex flex-col justify-self-center gap-10 md:justify-self-start">
-                        {p_col_2.map((p, idx) => (
-                        <motion.div className="card bg-accent shadow-xl max-w-96" key={idx}
-                         initial={{ opacity: 0, x: 200 }}
-                         whileInView={{ opacity: 1, x: 0 }}
-                         transition={{ duration: 0.6 }}
-                         viewport={{ margin: '0px 0px 0px -80px' }}>
-                            <figure>
-                                <img src={p.img} alt={`Image of project ${p.title}`} />
-                            </figure>
-                            <div className="card-body">
-                                <h2 className="class-title text-white">{p.title}</h2>
-                                <p>{p.description}</p>
-                                <div className="card-actions justify-end">
-                                    {p.skills.map((s, idx) => (<div className="badge badge-[--cs-background] p-3" key={`ps-${idx}`}>{s}</div>))}
-                                </div>
-                            </div>
-                        </motion.div>
-                        ))}
-                    </div>
-                </div>
+                <ProjectGrid projects={projects}/>
             </section>
             <Footer />
         </main>
