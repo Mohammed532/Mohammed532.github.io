@@ -57,7 +57,7 @@ export default function Home() {
                         Email: 'm.m.akinbayo@gmail.com'
                     }}/>
                 </div>
-                <Toast text="Scroll Down For More Info" duration={6} showFn={handleToast}/>
+                <Toast text="Scroll Down For More!" duration={6} showFn={handleToast}/>
             </section>
             <section className="flex py-10 flex-col justify-center content-center items-center md:flex-row">
                 <div className="my-10 relative glow-border z-[1] mx-10 ">
