@@ -39,7 +39,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps){
                     <ProjectCard key={idx} project={p} side='left'/>
                 ))}
             </div>
-            <div className={`flex flex-col justify-center gap-${GAP} md:justify-start`}>
+            <div className={`flex flex-col justify-center ${GAP} md:justify-start`}>
                 {p_col_2.map((p, idx) => (
                     <ProjectCard key={idx} project={p} side='right'/>
                 ))}
