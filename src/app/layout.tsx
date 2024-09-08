@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     template: "Mohammed Akinbayo | %s",
     default: "Mohammed Akinbayo"
   },
-  description: "Portfolio site for Mohammed Akinbayo",
+  description: "Portfolio site",
   keywords: ['Portfolio', 'Computer Science', 'Howard University', 'Javascript', 'Robotics', 'Hackathon'],
 };
 
