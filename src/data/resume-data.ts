@@ -70,18 +70,27 @@ const projects = [
         title: 'BVCC Kope App',
         description: 'Designed a mental health app for the Black Venture Capital Consortium.',
         skills: ['Figma', 'UI/UX', 'React', 'Firebase'],
+        links: {
+            'Design': 'https://www.figma.com/design/vKHCAs7VKvvIWilEOomW0F/Kope?node-id=1-3&t=429O4SaROHvUaQJ7-1'
+        }
     },
     {
         img: 'project-imgs/get_it_done_project.png',
         title: 'Get It Done',
         description: 'First complete React project. Was completed for the Hack Quarantine Hackathon',
         skills: ['Figma', 'UI/UX', 'React', 'Firebase'],
+        links: {
+            'Demo': 'https://devpost.com/software/get-it-done-20rf5d'
+        }
     },
     {
         img: 'project-imgs/Proficio.png',
         title: 'Proficio AI',
         description: 'Worked with a team for MLH HooHacks 2024 hackathon. Was the winners of the education track.',
         skills: ['React', 'AWS', 'Whisper/GPT-4', 'AI/ML'],
+        links: {
+            'Demo': 'https://devpost.com/software/proficio-ai'
+        }
     },
 ]
 

@@ -84,8 +84,8 @@ export default function Home() {
             </section>
             <section className="flex flex-col justify-center text-center">
                 <h2>Skills</h2>
-                <div className="flex flex-wrap justify-center" ref={scope}>
-                    {skillList.map((s, idx) => <motion.div key={idx} className="badge badge-accent badge-lg" initial={{ opacity: 0 }}>{s}</motion.div>)}
+                <div className="flex flex-wrap gap-2 justify-center" ref={scope}>
+                    {skillList.map((s, idx) => <motion.div key={idx} className="bg-accent rounded-xl p-3" initial={{ opacity: 0 }}>{s}</motion.div>)}
                 </div>
             </section>
             <section className="flex-col justify-center mt-40 mb-[50vh]">

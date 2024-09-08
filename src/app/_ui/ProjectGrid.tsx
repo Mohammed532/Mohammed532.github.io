@@ -3,12 +3,15 @@
 import { motion } from "framer-motion" 
 
 // types for props
+type LinkType = 'Demo' | 'Design' | 'Code' | 'Clips'
+
 type ProjectGridProps = {
     projects: {
         img: string // path to card image
         title: string // project name
         description: string // description of project
         skills: string[] // list of skills used for project
+        links?: {[L in LinkType]?: string} // various project links
     }[]
 }
 
@@ -18,6 +21,7 @@ type ProjectCardProps = {
         title: string // project name
         description: string // description of project
         skills: string[] // list of skills used for project
+        links?: {[L in LinkType]?: string} // various project links
     },
     side: 'left' | 'right',
 }
@@ -46,12 +50,13 @@ export default function ProjectGrid({ projects }: ProjectGridProps){
 }
 
 function ProjectCard({ project, side }: ProjectCardProps){
+
     return (
         <motion.div className={`card bg-accent shadow-xl max-w-96`}
          initial={side === 'right' ? { opacity: 0, x: 200 } : {opacity: 0, x: -200}}
          whileInView={{ opacity: 1, x: 0 }}
          transition={{ duration: 0.6 }}
-         viewport={{ margin: '99999px 0px 0px -80px' }}>
+         viewport={{ margin: '99999999px 0px 0px 0px' }}>
             <figure>
                 <img src={project.img} alt={`Image of project ${project.title}`} />
             </figure>
@@ -61,6 +66,19 @@ function ProjectCard({ project, side }: ProjectCardProps){
                 <div className="card-actions justify-end">
                     {project.skills.map((s, idx) => (<div className="badge badge-[--cs-background] p-3" key={`ps-${idx}`}>{s}</div>))}
                 </div>
+                {project.links && // only render if project.links exists
+                <>
+                <div className="divider divider-[--cs-background]">Links</div>
+                <div className="flex">
+                    {Object.entries(project.links)
+                     .sort(([kA], [kB]) => kA.localeCompare(kB)) // sort by key
+                     .map(([k,v]) => (
+                        <a key={k} href={v} className="uppercase text-secondary hover:text-[--cs-background]">{k}</a>
+                    ))}
+                </div>
+                </>
+                }
+
             </div>
         </motion.div>
     )
