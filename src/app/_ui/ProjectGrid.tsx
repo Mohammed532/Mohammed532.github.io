@@ -30,11 +30,11 @@ export default function ProjectGrid({ projects }: ProjectGridProps){
     let p_col_1 = projects.slice(0, Math.ceil(projects.length / 2)) 
     let p_col_2 = projects.slice(Math.ceil(projects.length / 2))
 
-    const GAP = 5 // gap width set using tailwind property (1=0.25rem)
+    const GAP = 'gap-5' // gap width set using tailwind property (1=0.25rem) (setting just number causes bug)
     
     return (
-        <div className={`flex flex-col justify-center gap-${GAP} md:flex-row`}>
-            <div className={`flex flex-col justify-center gap-${GAP} md:justify-end`}>
+        <div className={`flex flex-col justify-center ${GAP} md:flex-row`}>
+            <div className={`flex flex-col justify-center ${GAP} md:justify-end`}>
                 {p_col_1.map((p, idx) => (
                     <ProjectCard key={idx} project={p} side='left'/>
                 ))}
