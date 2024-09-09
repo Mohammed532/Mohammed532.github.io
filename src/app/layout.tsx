@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   },
   description: "Portfolio site",
   keywords: ['Portfolio', 'Computer Science', 'Howard University', 'Javascript', 'Robotics', 'Hackathon'],
+  metadataBase: new URL(`https://mohammed532.github.io/portfolio-2024`)
 };
 
 export default function RootLayout({
