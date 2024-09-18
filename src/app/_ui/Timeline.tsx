@@ -111,7 +111,7 @@ function TimelineFullItem({exp, idx, alternate, clickItemHandler, animation_marg
             <div className={`${alternate ? 'timeline-start md:text-end' : 'timeline-end'} w-full overflow-x-hidden`} id='skill-details'>
                 <motion.div id={`s-${idx}`} 
                 initial={alternate ? {marginRight: SKILL_MARGIN} : {marginLeft: SKILL_MARGIN}}>
-                    <h2 className="text-lg font-black mt-2 mx-2 text-white">Skills Used Even</h2>
+                    <h2 className="text-lg font-black mt-2 mx-2 text-white">Skills Used</h2>
                     <div className={`flex flex-wrap ${alternate ? 'justify-end' : 'justify-start'}`}>
                         {exp.skills.map((s, idx) => <div className="badge badge-accent badge-lg p6 m6" key={idx}>{s}</div>)}
                     </div>

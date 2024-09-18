@@ -1,4 +1,4 @@
-const skillList = ['Python', 'Javascript/Typescript', 'C++', 'Java', 'Node.js', 'React/Redux', 'Vue', 'Git/Github', 'Google Firebase/Google Cloud', 'Matlab', 'VHDL', 'MIPS']
+const skillList = ['Python', 'Javascript/Typescript', 'C++', 'Java', 'Node.js', 'React/Redux', 'Vue', 'Git/Github', 'Firebase/GCP', 'Matlab', 'VHDL', 'MIPS']
 
 const experience = [
     {
