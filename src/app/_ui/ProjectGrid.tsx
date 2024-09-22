@@ -34,7 +34,7 @@ export default function ProjectGrid({ projects }: ProjectGridProps){
     
     return (
         <div className={`flex flex-col justify-center ${GAP} md:flex-row`}>
-            <div className={`flex flex-col justify-center ${GAP} md:justify-end`}>
+            <div className={`flex flex-col justify-center ${GAP} md:justify-start`}>
                 {p_col_1.map((p, idx) => (
                     <ProjectCard key={idx} project={p} side='left'/>
                 ))}
@@ -59,7 +59,7 @@ function ProjectCard({ project, side }: ProjectCardProps){
         //  viewport={{ margin: '99999999px 0px 0px 0px' }}
         >
             <figure>
-                <img src={project.img} alt={`Image of project ${project.title}`} />
+                <img src={project.img === '' ? 'project-imgs/project-default.jpg' : project.img} alt={`Image of project ${project.title}`} />
             </figure>
             <div className="card-body">
                 <h2 className="class-title text-white">{project.title}</h2>

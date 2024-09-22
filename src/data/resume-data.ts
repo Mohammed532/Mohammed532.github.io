@@ -92,6 +92,12 @@ const projects = [
             'Demo': 'https://devpost.com/software/proficio-ai'
         }
     },
+    {
+        img: '',
+        title: 'Clear View AI',
+        description: 'Worked with a team for MLH VTHacks 2024 hackathon to create an app that utilizes generative AI to remove clutter from imgs of rooms meant to be posted on listing websites (such as Homes.com).',
+        skills: ['React', 'AWS', 'AI/ML', 'Flask'],
+    }
 ]
 
 export { skillList, experience, projects }

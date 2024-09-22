@@ -5,11 +5,12 @@ import { motion, useAnimate, stagger, useScroll, useInView} from "framer-motion"
 import { skillList, experience, projects } from "@/data/resume-data"
 import { ReactSVG } from "react-svg"
 
+import { 
+    Toast, 
+    Timeline, 
+    ContactList, 
+    ProjectGrid, } from '@/app/_ui'
 import Footer from "./footer"
-import Toast from "./_ui/Toast"
-import Timeline from "./_ui/Timeline"
-import ContactList from "./_ui/ContactList"
-import ProjectGrid from "./_ui/ProjectGrid"
 
 export default function Home() {
     // for skill list animation
