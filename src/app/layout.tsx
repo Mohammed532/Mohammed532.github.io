@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import Providers from "./providers"
 import { space_mono } from "@/styles/fonts";
 import "./globals.css";
 
@@ -17,9 +19,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en" data-theme='night'>
-      <body className={space_mono.className}>{children}</body>
+      <body className={space_mono.className}>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }

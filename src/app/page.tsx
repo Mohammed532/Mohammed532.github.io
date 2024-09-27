@@ -20,13 +20,6 @@ export default function Home() {
     // toast animation
     const { scrollY } = useScroll()
 
-    useEffect(() => {
-        if (inView){
-            animate('div', { opacity: 1 }, {delay: stagger(0.15)})
-        }
-    }, [inView, animate])
-
-
     // handler function for showing toast
     let handleToast = (t: number) => {
         const DELAY = 4
@@ -36,6 +29,11 @@ export default function Home() {
         }
 
         return false;
+    }
+
+    // skill list animation
+    if (inView){
+        animate('div', { opacity: 1 }, {delay: stagger(0.15)})
     }
 
     return (
@@ -89,7 +87,7 @@ export default function Home() {
                     {skillList.map((s, idx) => <motion.div key={idx} className="bg-accent rounded-xl p-3" initial={{ opacity: 0 }}>{s}</motion.div>)}
                 </div>
             </section>
-            <section className="flex-col justify-center mt-40 mb-[50vh]">
+            <section className="flex-col justify-center mt-4 mb-[50vh]">
                 <h2 className="text-center">Experience</h2>
                 <p className="text-center mb-5">A timeline of all <span className="emphasis">extracirricular</span> and <span className="emphasis">work</span> experience throughout my journey</p>
                 <p className="text-center mb-5">(Click on any experience for more information about it)</p>
