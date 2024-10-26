@@ -11,6 +11,7 @@ import {
     ContactList, 
     ProjectGrid, } from '@/app/_ui'
 import Footer from "./footer"
+import SkillGrid from "./SkillGrid"
 
 export default function Home() {
     // for skill list animation
@@ -71,7 +72,7 @@ export default function Home() {
                     <p>I&apos;m a <span className="emphasis">Howard University</span> student, 
                         working towards my B.S. in Computer Engineering. I have a wide 
                         arrange of interests, including <span className="emphasis">AI/ML</span>, 
-                        <span className="emphasis">Frontend Developement</span>, <span className="empasis">IoT</span> 
+                        <span className="emphasis">Frontend Developement</span>, <span className="emphasis">IoT</span> 
                         , <span className="emphasis">Robotics</span>, and much more. I have used my skills and interests to 
                         do exceptional work at <span className="emphasis">NASA</span>, <span className="emphasis">Apple</span>, 
                         and <span className="emphasis">CoStar Group</span>. I&apos;m hoping to 
@@ -81,11 +82,9 @@ export default function Home() {
                     </p>
                 </div>
             </section>
-            <section className="flex flex-col justify-center text-center">
+            <section className="flex flex-col justify-center text-center mb-36">
                 <h2>Skills</h2>
-                <div className="flex flex-wrap gap-2 justify-center" ref={scope}>
-                    {skillList.map((s, idx) => <motion.div key={idx} className="bg-accent rounded-xl p-3" initial={{ opacity: 0 }}>{s}</motion.div>)}
-                </div>
+                <SkillGrid />
             </section>
             <section className="flex-col justify-center mt-4 mb-[50vh]">
                 <h2 className="text-center">Experience</h2>
