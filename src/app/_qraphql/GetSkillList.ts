@@ -29,6 +29,7 @@ export default function GetSkillList(){
         }
     });
     
+    // formatted data for better handling
     let t_data: SkillTableData = {}; // tabelurized data
 
     useEffect(() => {
@@ -47,9 +48,6 @@ export default function GetSkillList(){
             })
         setData(t_data);
 
-        console.log(t_data);
-        
-        
         } else if(error) {
             setError(error);
         }

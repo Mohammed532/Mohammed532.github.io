@@ -25,7 +25,7 @@ export default function SkillGrid(){
     if(error) return <Error /> 
     return(
         <>
-            {Object.entries(data as Object).map(([k,v], idx) => (
+            {Object.entries(data as SkillTableData).map(([k,v], idx) => (
                 <SkillCard key={idx} s_type={k as SkillType} s_objs={v}/>
             ))}
         </>
@@ -46,7 +46,7 @@ function SkillCard({ s_type, s_objs }: SkillCardProps){
     }
 
     return(
-        <div className="my-8 md:w-5/6 self-center">
+        <div className="mb-16 md:w-5/6 self-center">
             <div className="flex justify-between">
                 <p className="italic">{s_type}</p>
                 <div className="hidden md:flex justify-self-stretch gap-5">

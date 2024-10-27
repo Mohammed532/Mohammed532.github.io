@@ -41,14 +41,14 @@ export default function Home() {
         <main id="main-page" className="overflow-x-hidden md:overflow-x-auto">
             <section className="flex flex-col gap-0-px justify-center content-center items-center md:justify-between md:flex-row" >
                 <div className="pt-5 text-xl md:text-4xl md:mx-10 md:basis-1/2">
-                    <h1 className="md:text-xl md:mb-5">hello world :)</h1>
+                    <h1 className="md:text-xl md:mb-5">hello_world :)</h1>
                     <h1>My name is</h1>
                     <h1 className="emphasis">Mohammed Akinbayo</h1>
                     <h1>But you can call me... </h1>
                 </div>
                 <div className="flex flex-col items-center px-22 md:basis-1/2">
                     <ReactSVG src="./portfolio-molybdenum.svg" className="min-h-[300px] w-[300px] md:min-h-[400px] md:w-[400px]" />
-                    <p className="md:w-full md:text-lg">Hehe, get it? <span className="emphasis">Mo?</span> Like the <span className="emphasis">Element?</span></p>
+                    <p className="md:w-full md:text-lg">Hehe, get it? <span className="emphasis">Mo?</span> Like the <span className="emphasis">element?</span></p>
                     <p className="md:w-full md:text-lg">Anyways here&apos;s my contact info</p>
                     <div className="md:w-full divider divider-accent"></div>
                     <ContactList contacts={{
@@ -68,7 +68,7 @@ export default function Home() {
                     className="shadow-xl rounded-md relative z-[1]"/>
                 </div>
                 <div className="md:w-1/3 md:mx-10">
-                    <h2>About Me</h2>
+                    <h2>About_Me</h2>
                     <p>I&apos;m a <span className="emphasis">Howard University</span> student, 
                         working towards my B.S. in Computer Engineering. I have a wide 
                         arrange of interests, including <span className="emphasis">AI/ML</span>, 
@@ -82,7 +82,7 @@ export default function Home() {
                     </p>
                 </div>
             </section>
-            <section className="flex flex-col justify-center text-center mb-36">
+            <section className="flex flex-col justify-center text-center my-40">
                 <h2>Skills</h2>
                 <SkillGrid />
             </section>

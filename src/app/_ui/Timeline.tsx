@@ -3,6 +3,7 @@
 import { AnimationSequence, At, motion, Transition, useAnimate } from 'framer-motion'
 import { useState } from 'react'
 import useWindowDimensions from '../_hooks/useWindowDimensions'
+import GetExperiences, { ExTableData } from '../_qraphql/GetExperiences'
 
 // types
 type TimelineProp = {
@@ -15,12 +16,7 @@ type TimelineProp = {
 }
 
 type TimelineItemProp = {
-    exp: {
-        time_span: string,
-        job_title: string,
-        job_description: string,
-        skills: string[]
-    },
+    exp: ExTableData, 
     idx: number,
     alternate: boolean,
     clickItemHandler: React.MouseEventHandler<HTMLLIElement>,
@@ -31,16 +27,21 @@ type TimelineItemProp = {
 }
 
 export default function Timeline({experience}: TimelineProp) {
+    const [data, loading, error] = GetExperiences();
     const [selectedId, setSelectedId] = useState<string[]>([]);
     const [scope, animate] = useAnimate();
-    let {width} = useWindowDimensions()
+    let {width} = useWindowDimensions();
 
     // ANIMATION CONSTANTS
-    const EXP_MARGIN = '-900%'
-    const SKILL_MARGIN = '-900%'
+    const EXP_MARGIN = '-900%';
+    const SKILL_MARGIN = '-900%';
 
     // MD DEVICE WIDTH
-    const MD_WIDTH = 767
+    const MD_WIDTH = 767;
+
+    if (loading) return <Loader />
+    if (error) return <Error />
+
 
     const selectItem: React.MouseEventHandler<HTMLLIElement> = (e) => {
         const id = e.currentTarget.id
@@ -73,14 +74,15 @@ export default function Timeline({experience}: TimelineProp) {
 
     return(
         <ul ref={scope} className={`timeline timeline-snap-icon max-md:timeline-compact timeline-vertical`}>
-            {experience.map((exp, idx) => {
+            {/* @ts-ignore: 'data' is possibly 'undefined', not possible in this case */}
+            {data.map((exp, idx) => {
                 if(width >= MD_WIDTH){
                     return (
-                        <TimelineFullItem key={idx} exp={exp} idx={idx} alternate={!!(idx%2)} clickItemHandler={selectItem} animation_margins={{EXP_MARGIN: EXP_MARGIN, SKILL_MARGIN: SKILL_MARGIN}}/>
+                        <TimelineFullItem key={exp.id || idx} exp={exp} idx={idx} alternate={!!(idx%2)} clickItemHandler={selectItem} animation_margins={{EXP_MARGIN: EXP_MARGIN, SKILL_MARGIN: SKILL_MARGIN}}/>
                     )
                 } else {
                     return (
-                        <TimelineCompactItem key={(idx)} exp={exp} idx={idx} alternate={!!(idx%2)} clickItemHandler={selectItem} animation_margins={{EXP_MARGIN: EXP_MARGIN, SKILL_MARGIN: SKILL_MARGIN}}/>
+                        <TimelineCompactItem key={exp.id || idx} exp={exp} idx={idx} alternate={!!(idx%2)} clickItemHandler={selectItem} animation_margins={{EXP_MARGIN: EXP_MARGIN, SKILL_MARGIN: SKILL_MARGIN}}/>
                     )
                 }
             })}
@@ -94,7 +96,7 @@ function TimelineFullItem({exp, idx, alternate, clickItemHandler, animation_marg
         <li key={idx} id={`${idx}`} className="group" onClick={clickItemHandler} role='button'>
             <hr className='bg-accent'/>
             <div className={`${alternate ? 'timeline-end' : 'timeline-start md:text-end'} border-8 border-[#0e1022] rounded-lg hover:bg-accent hover:border-accent`} id='exp-details'>
-                <time className="font-mono italic">{exp.time_span}</time>
+                <time className="font-mono italic">{ISOtoCustomDateString(exp.time_span[0])} - {exp.time_span[1] ? ISOtoCustomDateString(exp.time_span[1]) : 'Present'}</time>
                 <h2 className="text-lg font-black mt-2 whitespace-pre-line">{exp.job_title}</h2>
                 <div className='h-full overflow-y-hidden'>
                     <motion.p id={`exp-${idx}`}
@@ -109,13 +111,14 @@ function TimelineFullItem({exp, idx, alternate, clickItemHandler, animation_marg
                 </svg>
             </div>
             <div className={`${alternate ? 'timeline-start md:text-end' : 'timeline-end'} w-full overflow-x-hidden`} id='skill-details'>
-                <motion.div id={`s-${idx}`} 
+                {/* only show skills if skills exist in data */}
+                {exp.skills && <motion.div id={`s-${idx}`} 
                 initial={alternate ? {marginRight: SKILL_MARGIN} : {marginLeft: SKILL_MARGIN}}>
                     <h2 className="text-lg font-black mt-2 mx-2 text-white">Skills Used</h2>
                     <div className={`flex flex-wrap ${alternate ? 'justify-end' : 'justify-start'}`}>
                         {exp.skills.map((s, idx) => <div className="badge badge-accent badge-lg p6 m6" key={idx}>{s}</div>)}
                     </div>
-                </motion.div>
+                </motion.div>}
             </div>
             <hr className='bg-accent'/>
         </li>
@@ -128,18 +131,18 @@ function TimelineCompactItem({exp, idx, clickItemHandler, animation_margins}: Ti
         <li key={idx} id={`${idx}`} className="group" onClick={clickItemHandler} role='button'>
             <hr className='bg-accent'/>
             <div className={`timeline-start md:text-end border-8 border-[#0e1022] rounded-lg hover:bg-accent hover:border-accent`} id='exp-details'>
-                <time className="font-mono italic">{exp.time_span}</time>
+                <time className="font-mono italic">{ISOtoCustomDateString(exp.time_span[0])} - {exp.time_span[1] ? ISOtoCustomDateString(exp.time_span[1]) : 'Present'}</time>
                 <h2 className="text-lg font-black mt-2 whitespace-pre-line ">{exp.job_title}</h2>
                 <div className='h-full overflow-y-hidden'>
                     <motion.div id={`exp-${idx}`}
                      initial={{marginTop: EXP_MARGIN}}>
                         <p>{exp.job_description}</p>
-                        <div className='pt-6'>
+                        {exp.skills && <div className='pt-6'>
                             <h2 className="text-lg font-black mt-2 mx-2 text-secondary text-center">Skills Used</h2>
                             <div className={`flex flex-wrap justify-center`}>
-                                {exp.skills.map((s, idx) => <div className="badge badge-accent badge-lg p6 m6" key={idx}>{s}</div>)}
+                                {exp.skills.map((s, idx) => <div className="bg-accent rounded-xl p-2 m-1" key={idx}>{s}</div>)}
                             </div>
-                        </div>
+                        </div>}
                     </motion.div>
                 </div>
             </div>
@@ -151,4 +154,23 @@ function TimelineCompactItem({exp, idx, clickItemHandler, animation_margins}: Ti
             <hr className='bg-accent'/>
         </li>
     )
+}
+
+function Loader(){
+    return(
+        <p>Loading</p>
+    )
+}
+
+function Error(){
+    return(
+        <p>Error loading experiences. Please reload the page.</p>
+    )
+}
+
+function ISOtoCustomDateString(isoString: string){
+    const months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+
+    const d = new Date(isoString);
+    return `${months[d.getMonth()]} ${d.getFullYear()}`
 }
