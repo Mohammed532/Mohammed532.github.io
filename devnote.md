@@ -15,7 +15,7 @@ Simple notes file for development
 
 - [ ] Implement landing page strapi integration
   - [x] Skill Grid
-  - [ ] Experience
+  - [x] Experience
   - [ ] Projects
 - [ ] Implement blog page strapi integration
 

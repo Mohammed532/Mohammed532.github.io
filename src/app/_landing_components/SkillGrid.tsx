@@ -1,4 +1,4 @@
-import GetSkillList from "./_qraphql/GetSkillList"
+import GetSkillList from "../_qraphql/GetSkillList"
 
 // types
 type SkillType = 'Web Dev' | 'Engineering' | 'Design' | 'Soft Skills' | 'Other';
@@ -24,11 +24,11 @@ export default function SkillGrid(){
     if(loading) return <Loader />
     if(error) return <Error /> 
     return(
-        <>
+        <div className="skillgrid flex flex-col">
             {Object.entries(data as SkillTableData).map(([k,v], idx) => (
                 <SkillCard key={idx} s_type={k as SkillType} s_objs={v}/>
             ))}
-        </>
+        </div>
     )
 }
 
@@ -48,7 +48,7 @@ function SkillCard({ s_type, s_objs }: SkillCardProps){
     return(
         <div className="mb-16 md:w-5/6 self-center">
             <div className="flex justify-between">
-                <p className="italic">{s_type}</p>
+                <p className="italic text-secondary">{s_type}</p>
                 <div className="hidden md:flex justify-self-stretch gap-5">
                     <p className={`${profiency_text_cs.advanced}`}>ADVANCED</p>
                     <p className={`${profiency_text_cs.intermediate}`}>INTERMEDIATE</p>
@@ -56,8 +56,8 @@ function SkillCard({ s_type, s_objs }: SkillCardProps){
                 </div>
             </div>
             <div className="flex flex-wrap justify-center gap-3 bg-gradient-to-b from-accent to-[#0e1022] p-5 py-12 rounded-md my-1">
-                {s_objs.map(s => (
-                    <div className={`${profiency_border_cs[s.proficiency]} p-1 px-7 bg-[var(--cs-background)]`}>{s.skill} </div>
+                {s_objs.map((s, idx) => (
+                    <div key={idx} className={`${profiency_border_cs[s.proficiency]} p-1 px-7 bg-[var(--cs-background)]`}>{s.skill} </div>
                 ))}
             </div>
         </div>

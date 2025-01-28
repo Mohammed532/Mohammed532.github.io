@@ -6,15 +6,6 @@ import useWindowDimensions from '../_hooks/useWindowDimensions'
 import GetExperiences, { ExTableData } from '../_qraphql/GetExperiences'
 
 // types
-type TimelineProp = {
-    experience: {
-        time_span: string,
-        job_title: string,
-        job_description: string,
-        skills: string[]
-    }[]
-}
-
 type TimelineItemProp = {
     exp: ExTableData, 
     idx: number,
@@ -26,7 +17,7 @@ type TimelineItemProp = {
     }
 }
 
-export default function Timeline({experience}: TimelineProp) {
+export default function Timeline() {
     const [data, loading, error] = GetExperiences();
     const [selectedId, setSelectedId] = useState<string[]>([]);
     const [scope, animate] = useAnimate();
@@ -78,11 +69,22 @@ export default function Timeline({experience}: TimelineProp) {
             {data.map((exp, idx) => {
                 if(width >= MD_WIDTH){
                     return (
-                        <TimelineFullItem key={exp.id || idx} exp={exp} idx={idx} alternate={!!(idx%2)} clickItemHandler={selectItem} animation_margins={{EXP_MARGIN: EXP_MARGIN, SKILL_MARGIN: SKILL_MARGIN}}/>
+                        <TimelineFullItem 
+                          key={exp.id || idx} 
+                          exp={exp} 
+                          idx={idx} 
+                          alternate={!!(idx%2)} 
+                          clickItemHandler={selectItem} 
+                          animation_margins={{EXP_MARGIN: EXP_MARGIN, SKILL_MARGIN: SKILL_MARGIN}}/>
                     )
                 } else {
                     return (
-                        <TimelineCompactItem key={exp.id || idx} exp={exp} idx={idx} alternate={!!(idx%2)} clickItemHandler={selectItem} animation_margins={{EXP_MARGIN: EXP_MARGIN, SKILL_MARGIN: SKILL_MARGIN}}/>
+                        <TimelineCompactItem 
+                          key={exp.id || idx} 
+                          exp={exp} idx={idx} 
+                          alternate={!!(idx%2)} 
+                          clickItemHandler={selectItem} 
+                          animation_margins={{EXP_MARGIN: EXP_MARGIN, SKILL_MARGIN: SKILL_MARGIN}}/>
                     )
                 }
             })}
@@ -158,13 +160,25 @@ function TimelineCompactItem({exp, idx, clickItemHandler, animation_margins}: Ti
 
 function Loader(){
     return(
-        <p>Loading</p>
+        <div className='flex justify-center'>
+            <div className="my-8 md:w-5/6">
+                <div className="flex my-4 justify-between">
+                    <div className="skeleton h-4 w-24"></div>
+                    <div className="hidden md:flex justify-self-stretch gap-5">
+                        <div className="skeleton w-20"></div>
+                        <div className="skeleton w-20"></div>
+                        <div className="skeleton w-20"></div>
+                    </div>
+                </div>
+                <div className="skeleton h-64"></div>
+            </div>
+        </div>
     )
 }
 
 function Error(){
     return(
-        <p>Error loading experiences. Please reload the page.</p>
+        <p className='text-error text-center'>Error loading experiences. Please reload the page.</p>
     )
 }
 

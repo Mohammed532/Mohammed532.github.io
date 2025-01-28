@@ -7,11 +7,9 @@ import { ReactSVG } from "react-svg"
 
 import { 
     Toast, 
-    Timeline, 
-    ContactList, 
-    ProjectGrid, } from '@/app/_ui'
+    ContactList,} from '@/app/_ui'
+import { ProjectGrid, SkillGrid, Timeline } from "@/app/_landing_components"
 import Footer from "./footer"
-import SkillGrid from "./SkillGrid"
 
 export default function Home() {
     // for skill list animation
@@ -83,18 +81,18 @@ export default function Home() {
                 </div>
             </section>
             <section className="flex flex-col justify-center text-center my-40">
-                <h2>Skills</h2>
+                <h2 className="mb-4">Skills</h2>
                 <SkillGrid />
             </section>
             <section className="flex-col justify-center mt-4 mb-[50vh]">
                 <h2 className="text-center">Experience</h2>
                 <p className="text-center mb-5">A timeline of all <span className="emphasis">extracirricular</span> and <span className="emphasis">work</span> experience throughout my journey</p>
                 <p className="text-center mb-5">(Click on any experience for more information about it)</p>
-                <Timeline experience={experience} />
+                <Timeline />
             </section>
             <section>
                 <h2 className="text-center py-5">Projects</h2>
-                <ProjectGrid projects={projects}/>
+                <ProjectGrid/>
             </section>
             <Footer />
         </main>

@@ -1,11 +1,15 @@
 'use client'
 
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
-import { ReactNode } from 'react'
+import { ReactNode, createContext } from 'react'
+
+import ImageHostContext from './_context/ImageHostContext'
 
 type ProvidersProp = {
     children: ReactNode,
 }
+
+const imageHostURL = 'http://localhost:1337';
 
 export default function Providers({children}: ProvidersProp){
 
@@ -18,7 +22,9 @@ export default function Providers({children}: ProvidersProp){
 
     return (
         <ApolloProvider client={apolloClient}>
-            {children}
+            <ImageHostContext.Provider value={imageHostURL}>
+                {children}
+            </ImageHostContext.Provider>
         </ApolloProvider>
     )
 

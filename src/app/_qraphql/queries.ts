@@ -16,7 +16,7 @@ export const GET_SKILL_LIST = gql(`
 `)
 
 export const GET_EXPERIENCES = gql(`
-  query ExperiencesQuery {
+  query Experiences {
     experiences {
       data {
         id
@@ -34,6 +34,43 @@ export const GET_EXPERIENCES = gql(`
             end_date
             start_date
           }
+        }
+      }
+    }
+  }
+`)
+
+export const GET_PROJECTS = gql(`
+  query Projects {
+    projects {
+      data {
+        id
+        attributes {
+          description
+          imgs {
+            data {
+              attributes {
+                alternativeText
+                url
+                width
+                height
+              }
+            }
+          }
+          links {
+            clip
+            code
+            demo
+            design
+          }
+          skill_lists {
+            data {
+              attributes {
+                skill
+              }
+            }
+          }
+          title
         }
       }
     }
