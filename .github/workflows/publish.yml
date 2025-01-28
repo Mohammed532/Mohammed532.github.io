@@ -48,6 +48,9 @@ jobs:
             echo "Unable to determine package manager"
             exit 1
           fi
+      - name: Get Commit Timestamp
+        id: get-timestamp
+        run: echo "LAST_UPDATE=$(date -u +"%B %Y")" >> $GITHUB_ENV
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -73,8 +76,14 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        # NEXTJS BUILD
       - name: Build with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        env: 
+          LAST_UPDATE: ${{ env.LAST_UPDATE }}
+        run: | 
+          echo "Injecting LAST_UPDATE into the build"
+          echo "NEXT_PUBLIC_LAST_UPDATE=${{ env.LAST_UPDATE }}" >> .env
+          ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
