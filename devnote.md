@@ -10,6 +10,7 @@ WE'RE NUKING STRAPI INTEGRATION AND SWITHING TO FIREBASE
 
 - [ ] Remove Strapi in main branch (strapi is configured on strapi-base-build local branch)
 - [ ] push main to remote dev branch (`git push origin main:dev`)
+- [ ] push to remote main aswell
 - [ ] Create new firebase branch, add Firebase updates
 - [ ] Push to dev (`git push origin firebase-build:dev`)
 - [ ] Merge with main branch, push to main (`git push`)
