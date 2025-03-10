@@ -58,3 +58,7 @@ Tasks to be worked on after removing all strapi involvement
 - To generate new types on updated queries:
 
     `npm run watch`
+
+## LAN Dev
+
+npm run dev -- -H <machine ip>
