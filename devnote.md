@@ -62,3 +62,8 @@ Tasks to be worked on after removing all strapi involvement
 ## LAN Dev
 
 npm run dev -- -H <machine ip>
+
+
+## Firebase
+
+- for skills reference in other collections, just strip the string for the last part :)
