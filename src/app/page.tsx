@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, useAnimate, stagger, useScroll, useInView} from "framer-motion"
-import { skillList, experience, projects } from "@/data/resume-data"
+import { skills, experience, projects } from "@/data/resume-data"
 import { ReactSVG } from "react-svg"
 
 import { 

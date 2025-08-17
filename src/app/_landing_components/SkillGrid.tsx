@@ -7,7 +7,7 @@ type SkillType = 'Web Dev' | 'Engineering' | 'Design' | 'Soft Skills' | 'Other';
 type Skill = {
     id: number,
     skill: string,
-    proficiency: 'advanced' | 'intermediate' | 'beginner'
+    proficiency: 'advanced' | 'intermediate' | 'novice'
 }
 
 type SkillTableData = {
@@ -22,7 +22,7 @@ type SkillCardProps = {
 export default function SkillGrid(){
     // const [data, loading, error] = GetSkillList()
     let data = skills;
-    
+
     return(
         <div className="skillgrid flex flex-col">
             {Object.entries(data as SkillTableData).map(([k,v], idx) => (
