@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion" 
 import GetProjects, { ProjectsTableData } from '@/app/_qraphql/GetProjects'
+import { projects } from "@/data/resume-data"
 
 // types for props
 type LinkType = 'Demo' | 'Design' | 'Code' | 'Clips'
@@ -22,12 +23,11 @@ type ProjectCardProps = {
 }
 
 export default function ProjectGrid(){
-    const [data, loading, error] = GetProjects();
-    
-    if (loading) return <Loader />
-    if (error) return <Error />
-    console.log(data);
-    
+    // const [data, loading, error] = GetProjects();
+    // if (loading) return <Loader />
+    // if (error) return <Error />
+   
+    let data = projects;
 
     // let t_data = data ? data : [] // TODO there's a better way of doing this, it's late tho n im tired
 

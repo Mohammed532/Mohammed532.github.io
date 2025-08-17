@@ -1,4 +1,5 @@
 import GetSkillList from "../_qraphql/GetSkillList"
+import { skills } from "@/data/resume-data";
 
 // types
 type SkillType = 'Web Dev' | 'Engineering' | 'Design' | 'Soft Skills' | 'Other';
@@ -19,10 +20,9 @@ type SkillCardProps = {
 }
 
 export default function SkillGrid(){
-    const [data, loading, error] = GetSkillList()
-
-    if(loading) return <Loader />
-    if(error) return <Error /> 
+    // const [data, loading, error] = GetSkillList()
+    let data = skills;
+    
     return(
         <div className="skillgrid flex flex-col">
             {Object.entries(data as SkillTableData).map(([k,v], idx) => (
@@ -36,13 +36,13 @@ function SkillCard({ s_type, s_objs }: SkillCardProps){
     const profiency_text_cs = {
         'advanced': 'text-[#9552ea]',
         'intermediate': 'text-[#52ea77]',
-        'beginner': 'text-[#e2ea52]'
+        'novice': 'text-[#e2ea52]'
     }
 
     const profiency_border_cs = {
         'advanced': 'border-2 rounded-xl border-[#9552ea]',
         'intermediate': 'border-2 rounded-xl border-[#52ea77]',
-        'beginner': 'border-2 rounded-xl border-[#e2ea52]'
+        'novice': 'border-2 rounded-xl border-[#e2ea52]'
     }
 
     return(
@@ -52,7 +52,7 @@ function SkillCard({ s_type, s_objs }: SkillCardProps){
                 <div className="hidden md:flex justify-self-stretch gap-5">
                     <p className={`${profiency_text_cs.advanced}`}>ADVANCED</p>
                     <p className={`${profiency_text_cs.intermediate}`}>INTERMEDIATE</p>
-                    <p className={`${profiency_text_cs.beginner}`}>NOVICE</p>
+                    <p className={`${profiency_text_cs.novice}`}>NOVICE</p>
                 </div>
             </div>
             <div className="flex flex-wrap justify-center gap-3 bg-gradient-to-b from-accent to-[#0e1022] p-5 py-12 rounded-md my-1">

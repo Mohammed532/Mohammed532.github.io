@@ -43,6 +43,12 @@ WE'RE NUKING STRAPI INTEGRATION AND SWITHING TO FIREBASE
     - [ ] Experience
     - [ ] Blogs
 
+## BLOG
+
+For blog:
+- create editor for .mdx code, and store in .mdx file
+- store that .mdx file in firebase storage
+
 ## GraphQL (no longer being used :( )
 
 Tasks to be worked on after removing all strapi involvement
@@ -58,3 +64,4 @@ Tasks to be worked on after removing all strapi involvement
 - To generate new types on updated queries:
 
     `npm run watch`
+

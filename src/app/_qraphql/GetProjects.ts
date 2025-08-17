@@ -6,10 +6,10 @@ import ImageHostContext from "../_context/ImageHostContext"
 
 type LinkType = 'demo' | 'design' | 'code' | 'clips'
 type ProjectsTableData = {
-    id: string
+    id: string | number
     img: {
-        alt: string | null,
         url: string,
+        alt: string | null,
         width: number,
         height: number
     } | null

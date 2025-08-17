@@ -3,7 +3,7 @@ import { ApolloError, useQuery } from "@apollo/client"
 import { GET_EXPERIENCES } from "@/app/_qraphql/queries"
 
 type ExTableData = {
-    id: string | null | undefined,
+    id: string | number | null | undefined,
     time_span: [string, string | null]; // [start_date, end_date]
     job_title: string,
     job_description: string,

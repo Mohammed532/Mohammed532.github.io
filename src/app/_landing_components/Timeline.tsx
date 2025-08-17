@@ -4,6 +4,7 @@ import { AnimationSequence, At, motion, Transition, useAnimate } from 'framer-mo
 import { useState } from 'react'
 import useWindowDimensions from '../_hooks/useWindowDimensions'
 import GetExperiences, { ExTableData } from '../_qraphql/GetExperiences'
+import { experience } from '@/data/resume-data'
 
 // types
 type TimelineItemProp = {
@@ -18,7 +19,10 @@ type TimelineItemProp = {
 }
 
 export default function Timeline() {
-    const [data, loading, error] = GetExperiences();
+    // const [data, loading, error] = GetExperiences();
+    
+    let data = experience;
+
     const [selectedId, setSelectedId] = useState<string[]>([]);
     const [scope, animate] = useAnimate();
     let {width} = useWindowDimensions();
@@ -30,8 +34,8 @@ export default function Timeline() {
     // MD DEVICE WIDTH
     const MD_WIDTH = 767;
 
-    if (loading) return <Loader />
-    if (error) return <Error />
+    // if (loading) return <Loader/>
+    // if (error) return <Error />
 
 
     const selectItem: React.MouseEventHandler<HTMLLIElement> = (e) => {

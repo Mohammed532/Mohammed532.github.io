@@ -7,10 +7,11 @@ type SkillTableData = {
     [S in SkillType]?: {
         id: number,
         skill: string,
-        proficiency: 'advanced' | 'intermediate' | 'beginner'
+        proficiency: 'advanced' | 'intermediate' | 'novice'
     }[]
 };
 
+// TODO: update to work with firebase instead
 export default function GetSkillList(){
     const [s_data, setData] = useState<SkillTableData | undefined>(undefined);
     const [s_loading, setLoading] = useState(true);
