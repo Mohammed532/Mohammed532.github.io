@@ -1,4 +1,6 @@
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { createContext } from "react";
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -12,3 +14,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const fstore = getFirestore(app);
+
+const fs = {fstore: fstore};
+const FSContext = createContext(fs);
+
+export default FSContext;
+export { fs }

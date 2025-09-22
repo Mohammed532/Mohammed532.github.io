@@ -4,6 +4,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client
 import { ReactNode, createContext } from 'react'
 
 import ImageHostContext from './_context/ImageHostContext'
+import FSContext, { fs } from './_context/FirebaseContext'
 
 type ProvidersProp = {
     children: ReactNode,
@@ -23,7 +24,9 @@ export default function Providers({children}: ProvidersProp){
     return (
         <ApolloProvider client={apolloClient}>
             <ImageHostContext.Provider value={imageHostURL}>
-                {children}
+                <FSContext.Provider value={fs}>
+                    {children}
+                </FSContext.Provider>
             </ImageHostContext.Provider>
         </ApolloProvider>
     )
