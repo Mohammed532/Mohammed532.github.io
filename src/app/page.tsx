@@ -72,8 +72,8 @@ export default function Home() {
                         arrange of interests, including <span className="emphasis">AI/ML</span>, 
                         <span className="emphasis">Frontend Developement</span>, <span className="emphasis">IoT</span> 
                         , <span className="emphasis">Robotics</span>, and much more. I have used my skills and interests to 
-                        do exceptional work at <span className="emphasis">NASA</span>, <span className="emphasis">Apple</span>, 
-                        and <span className="emphasis">CoStar Group</span>. I&apos;m hoping to 
+                        do exceptional work at <span className="emphasis">NASA</span>, <span className="emphasis">Apple</span>, <span className="emphasis">CoStar Group</span>,
+                        and <span className="emphasis">Northrop Grumman</span>. I&apos;m hoping to 
                         grow my skills and continue my learning. I believe that the pursuit of 
                         knowledge is a lifelong journey, so please let me show you the 
                         fruits of that journey!

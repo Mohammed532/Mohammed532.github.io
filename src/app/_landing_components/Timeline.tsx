@@ -30,6 +30,8 @@ export default function Timeline() {
     // ANIMATION CONSTANTS
     const EXP_MARGIN = '-900%';
     const SKILL_MARGIN = '-900%';
+    const OPEN_DUR = 1;
+    const CLOSE_DUR = 1;
 
     // MD DEVICE WIDTH
     const MD_WIDTH = 767;
@@ -50,18 +52,18 @@ export default function Timeline() {
         if (!selectedId.includes(id)){
             //open animation
             sequence = [
-                [`#exp-${id}`, { marginTop: '0%' }, {type: 'spring', duration: 1, bounce: 0.2}],
-                [`#s-${id}`, skill_side[parseInt(id)%2].open, {type: 'spring', duration: 1, bounce: 0.2}]
+                [`#exp-${id}`, { marginTop: '0%' }, {type: 'spring', duration: OPEN_DUR, bounce: 0.1}],
+                [`#s-${id}`, skill_side[parseInt(id)%2].open, {type: 'spring', duration: OPEN_DUR, bounce: 0.1}]
             ]
             animate(sequence)
             setSelectedId(prev => [...prev, id])
         } else {
             // close animation
             sequence = [
-                [`#s-${id}`, skill_side[parseInt(id)%2].close, {type: 'spring', duration: 0.3}],
-                [`#exp-${id}`, { marginTop: EXP_MARGIN }, {type: 'spring', duration: 0.3 }]
+                [`#s-${id}`, skill_side[parseInt(id)%2].close, {type: 'spring', duration: CLOSE_DUR}],
+                [`#exp-${id}`, { marginTop: EXP_MARGIN }, {type: 'spring', duration: CLOSE_DUR }]
             ]
-            animate(sequence)
+            animate(sequence, {duration: CLOSE_DUR - 0.1})
             setSelectedId(prev => prev.filter(pid => pid !== id))
         }
 
@@ -103,7 +105,7 @@ function TimelineFullItem({exp, idx, alternate, clickItemHandler, animation_marg
             <hr className='bg-accent'/>
             <div className={`${alternate ? 'timeline-end' : 'timeline-start md:text-end'} border-8 border-[#0e1022] rounded-lg hover:bg-accent hover:border-accent`} id='exp-details'>
                 <time className="font-mono italic">{ISOtoCustomDateString(exp.time_span[0])} - {exp.time_span[1] ? ISOtoCustomDateString(exp.time_span[1]) : 'Present'}</time>
-                <h2 className="text-lg font-black mt-2 whitespace-pre-line">{exp.job_title}</h2>
+                <h3 className="text-lg font-black mt-2 whitespace-pre-line">{exp.job_title}</h3>
                 <div className='h-full overflow-y-hidden'>
                     <motion.p id={`exp-${idx}`}
                     initial={{marginTop: EXP_MARGIN}}>
@@ -138,7 +140,7 @@ function TimelineCompactItem({exp, idx, clickItemHandler, animation_margins}: Ti
             <hr className='bg-accent'/>
             <div className={`timeline-start md:text-end border-8 border-[#0e1022] rounded-lg hover:bg-accent hover:border-accent`} id='exp-details'>
                 <time className="font-mono italic">{ISOtoCustomDateString(exp.time_span[0])} - {exp.time_span[1] ? ISOtoCustomDateString(exp.time_span[1]) : 'Present'}</time>
-                <h2 className="text-lg font-black mt-2 whitespace-pre-line ">{exp.job_title}</h2>
+                <h3 className="text-lg font-black mt-2 whitespace-pre-line ">{exp.job_title}</h3>
                 <div className='h-full overflow-y-hidden'>
                     <motion.div id={`exp-${idx}`}
                      initial={{marginTop: EXP_MARGIN}}>
