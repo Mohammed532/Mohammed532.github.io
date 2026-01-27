@@ -3,11 +3,11 @@
 import { AnimationSequence, At, motion, Transition, useAnimate } from 'framer-motion'
 import { useState } from 'react'
 import useWindowDimensions from '../_hooks/useWindowDimensions'
-import GetExperiences, { ExTableData } from '../_qraphql/GetExperiences'
+import GetExperiences, { ExpTableData } from '../_gets/GetExperiences'
 
 // types
 type TimelineItemProp = {
-    exp: ExTableData, 
+    exp: ExpTableData, 
     idx: number,
     alternate: boolean,
     clickItemHandler: React.MouseEventHandler<HTMLLIElement>,

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from "framer-motion" 
-import GetProjects, { ProjectsTableData } from '@/app/_qraphql/GetProjects'
+import GetProjects, { ProjectsTableData } from '@/app/_gets/GetProjects'
 
 // types for props
 type LinkType = 'Demo' | 'Design' | 'Code' | 'Clips'
