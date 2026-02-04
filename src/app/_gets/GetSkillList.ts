@@ -3,7 +3,6 @@
 import { useEffect, useState, useContext } from "react";
 import FSContext from "../_context/FirebaseContext";
 import { collection, getDocs } from "firebase/firestore";
-import { FirebaseError } from "firebase/app";
 import { PROFICIENCY_ORDER } from "@/data/constants";
 
 type SkillType = 'Web Dev' | 'Engineering' | 'Design' | 'Soft Skills' | 'Other';
@@ -70,8 +69,6 @@ export default function GetSkillList(){
                     });
                 });
 
-                console.log(t_data);
-                
                 // sort skills by proficiency
                 t_data = sortSkills(t_data);
 

@@ -1,11 +1,12 @@
+'use client'
+
 import { useState, useEffect, useContext } from "react"
-import { ApolloError, useQuery } from "@apollo/client"
 import FSContext from "../_context/FirebaseContext";
-import { collection, getDocs } from "firebase/firestore";
+import { query, collection, DocumentReference, getDocs, orderBy, Timestamp } from "firebase/firestore";
 
 type ExpTableData = {
-    id: string | null | undefined,
-    time_span: [string, string | null]; // [start_date, end_date]
+    id: string,
+    time_span: [Date, Date | null]; // [start_date, end_date]
     job_title: string,
     job_description: string,
     skills: string[] | null,
@@ -14,24 +15,61 @@ type ExpTableData = {
 export default function GetExperiences(){
     const fs  = useContext(FSContext);
     
-    const [exp_data, setData] = useState<ExpTableData[] | undefined>(undefined);
-    const [exp_loading, setLoading] = useState<boolean>(true);
-    const [exp_error, setError] = useState<ApolloError | undefined>(undefined);
+    const [exp_data, setData] = useState<ExpTableData[] | undefined | null>(undefined);
+    const [exp_loading, setLoading] = useState(true);
+    const [exp_error, setError] = useState<Error | undefined | null>(undefined);
 
-    // formatted data for better handling
-    let t_data: ExpTableData[] = [];
     useEffect(() => {
         const readfs = async() => {
             try {
-                const expSnap = getDocs(collection(fs.fstore, 'experiences'));
-                console.log(expSnap);
+                // formatted data for better handling
+                let t_data: ExpTableData[] = [];
+                const expSnap = await getDocs(query(
+                    collection(fs.fstore, 'experiences'),
+                    orderBy('startDate', 'asc')
+                ));
+
+                console.log(expSnap.size);
                 
-            } catch(err) {
-                console.log(err);
+                            
+                // throw error if query return empty
+                if (expSnap.empty) {throw new Error('Failed data read: Query returned empty')};
                 
+                // format data and place in table (t_data)
+                expSnap.forEach(doc => {
+                    let data = doc.data();
+
+                    // dates
+                    let sdate = data.startDate.toDate() as Date;
+                    let edate = data.endDate ? data.endDate.toDate() as Date : null;
+
+                    t_data.push({
+                        id: doc.id,
+                        time_span: [sdate, edate],
+                        job_title: doc.id,
+                        job_description: data.description,
+                        skills: data.skills.map((ref: DocumentReference) => ref.id)
+                    });
+                    
+                    setData(t_data);
+                    setError(null);
+                    setLoading(false);
+                });
+                
+            } catch(err: unknown) {
+                if(err instanceof Error) {
+                    console.error(err);
+                    setError(err);
+                } else {
+                    let e = new Error("Unknown error was thrown");
+                    console.error(e);
+                    setError(e);
+                }
+                setData(null);
+                setLoading(false);
             }
         }
-            setData(t_data);
+        readfs();
     }, [])
 
     return [exp_data, exp_loading, exp_error];

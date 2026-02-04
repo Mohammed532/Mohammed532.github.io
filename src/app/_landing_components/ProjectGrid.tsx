@@ -82,7 +82,6 @@ function ProjectCard({ project, side }: ProjectCardProps){
                 </div>
                 </>
                 }
-
             </div>
         </motion.div>
     )
@@ -91,16 +90,17 @@ function ProjectCard({ project, side }: ProjectCardProps){
 
 function Loader(){
     return(
-        <>
-            <p>loading</p>
-        </>
+        <div className="flex justify-center gap-5">
+            <div className="skeleton h-96 w-1/3"></div>
+            <div className="skeleton h-96 w-1/3"></div>
+        </div>
     )
 }
 
 function Error(){
     return(
         <>
-            <p>Error</p>
+            <p className="text-error text-center">Error loading projects. Please reload the page.</p>
         </>
     )
 }

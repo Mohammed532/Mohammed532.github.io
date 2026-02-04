@@ -33,7 +33,6 @@ export default function Timeline() {
     if (loading) return <Loader />
     if (error) return <Error />
 
-
     const selectItem: React.MouseEventHandler<HTMLLIElement> = (e) => {
         const id = e.currentTarget.id
         let sequence: AnimationSequence
@@ -98,7 +97,7 @@ function TimelineFullItem({exp, idx, alternate, clickItemHandler, animation_marg
         <li key={idx} id={`${idx}`} className="group" onClick={clickItemHandler} role='button'>
             <hr className='bg-accent'/>
             <div className={`${alternate ? 'timeline-end' : 'timeline-start md:text-end'} border-8 border-[#0e1022] rounded-lg hover:bg-accent hover:border-accent`} id='exp-details'>
-                <time className="font-mono italic">{ISOtoCustomDateString(exp.time_span[0])} - {exp.time_span[1] ? ISOtoCustomDateString(exp.time_span[1]) : 'Present'}</time>
+                <time className="font-mono italic">{DatetoCustomString(exp.time_span[0])} - {exp.time_span[1] ? DatetoCustomString(exp.time_span[1]) : 'Present'}</time>
                 <h2 className="text-lg font-black mt-2 whitespace-pre-line">{exp.job_title}</h2>
                 <div className='h-full overflow-y-hidden'>
                     <motion.p id={`exp-${idx}`}
@@ -133,7 +132,7 @@ function TimelineCompactItem({exp, idx, clickItemHandler, animation_margins}: Ti
         <li key={idx} id={`${idx}`} className="group" onClick={clickItemHandler} role='button'>
             <hr className='bg-accent'/>
             <div className={`timeline-start md:text-end border-8 border-[#0e1022] rounded-lg hover:bg-accent hover:border-accent`} id='exp-details'>
-                <time className="font-mono italic">{ISOtoCustomDateString(exp.time_span[0])} - {exp.time_span[1] ? ISOtoCustomDateString(exp.time_span[1]) : 'Present'}</time>
+                <time className="font-mono italic">{DatetoCustomString(exp.time_span[0])} - {exp.time_span[1] ? DatetoCustomString(exp.time_span[1]) : 'Present'}</time>
                 <h2 className="text-lg font-black mt-2 whitespace-pre-line ">{exp.job_title}</h2>
                 <div className='h-full overflow-y-hidden'>
                     <motion.div id={`exp-${idx}`}
@@ -182,9 +181,10 @@ function Error(){
     )
 }
 
-function ISOtoCustomDateString(isoString: string){
-    const months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
-
-    const d = new Date(isoString);
-    return `${months[d.getMonth()]} ${d.getFullYear()}`
+function DatetoCustomString(date: Date){
+    return date.toLocaleString('en-US', {
+        month: 'long',
+        year: 'numeric',
+        timeZone: 'UTC'
+    });
 }

@@ -88,11 +88,11 @@ export default function Home() {
                 <h2 className="text-center">Experience</h2>
                 <p className="text-center mb-5">A timeline of all <span className="emphasis">extracirricular</span> and <span className="emphasis">work</span> experience throughout my journey</p>
                 <p className="text-center mb-5">(Click on any experience for more information about it)</p>
-                {/* <Timeline /> */}
+                <Timeline />
             </section>
             <section>
                 <h2 className="text-center py-5">Projects</h2>
-                {/* <ProjectGrid/> */}
+                <ProjectGrid/>
             </section>
             <Footer />
         </main>
