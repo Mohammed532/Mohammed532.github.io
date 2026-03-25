@@ -3,12 +3,11 @@
 import { AnimationSequence, At, motion, Transition, useAnimate } from 'framer-motion'
 import { useState } from 'react'
 import useWindowDimensions from '../_hooks/useWindowDimensions'
-import GetExperiences, { ExTableData } from '../_qraphql/GetExperiences'
-import { experience } from '@/data/resume-data'
+import GetExperiences, { ExpTableData } from '../_gets/GetExperiences'
 
 // types
 type TimelineItemProp = {
-    exp: ExTableData, 
+    exp: ExpTableData, 
     idx: number,
     alternate: boolean,
     clickItemHandler: React.MouseEventHandler<HTMLLIElement>,
@@ -19,10 +18,8 @@ type TimelineItemProp = {
 }
 
 export default function Timeline() {
-    // const [data, loading, error] = GetExperiences();
+    const [data, loading, error] = GetExperiences();
     
-    let data = experience;
-
     const [selectedId, setSelectedId] = useState<string[]>([]);
     const [scope, animate] = useAnimate();
     let {width} = useWindowDimensions();
@@ -38,7 +35,6 @@ export default function Timeline() {
 
     // if (loading) return <Loader/>
     // if (error) return <Error />
-
 
     const selectItem: React.MouseEventHandler<HTMLLIElement> = (e) => {
         const id = e.currentTarget.id
@@ -104,8 +100,8 @@ function TimelineFullItem({exp, idx, alternate, clickItemHandler, animation_marg
         <li key={idx} id={`${idx}`} className="group" onClick={clickItemHandler} role='button'>
             <hr className='bg-accent'/>
             <div className={`${alternate ? 'timeline-end' : 'timeline-start md:text-end'} border-8 border-[#0e1022] rounded-lg hover:bg-accent hover:border-accent`} id='exp-details'>
-                <time className="font-mono italic">{ISOtoCustomDateString(exp.time_span[0])} - {exp.time_span[1] ? ISOtoCustomDateString(exp.time_span[1]) : 'Present'}</time>
-                <h3 className="text-lg font-black mt-2 whitespace-pre-line">{exp.job_title}</h3>
+                <time className="font-mono italic">{DatetoCustomString(exp.time_span[0])} - {exp.time_span[1] ? DatetoCustomString(exp.time_span[1]) : 'Present'}</time>
+                <h2 className="text-lg font-black mt-2 whitespace-pre-line">{exp.job_title}</h2>
                 <div className='h-full overflow-y-hidden'>
                     <motion.p id={`exp-${idx}`}
                     initial={{marginTop: EXP_MARGIN}}>
@@ -124,7 +120,7 @@ function TimelineFullItem({exp, idx, alternate, clickItemHandler, animation_marg
                 initial={alternate ? {marginRight: SKILL_MARGIN} : {marginLeft: SKILL_MARGIN}}>
                     <h2 className="text-lg font-black mt-2 mx-2 text-white">Skills Used</h2>
                     <div className={`flex flex-wrap ${alternate ? 'justify-end' : 'justify-start'}`}>
-                        {exp.skills.map((s, idx) => <div className="badge badge-accent badge-lg p6 m6" key={idx}>{s}</div>)}
+                        {exp.skills.map((s, idx) => <div className="badge badge-accent badge-lg p6 m6 capitalize" key={idx}>{s}</div>)}
                     </div>
                 </motion.div>}
             </div>
@@ -139,8 +135,8 @@ function TimelineCompactItem({exp, idx, clickItemHandler, animation_margins}: Ti
         <li key={idx} id={`${idx}`} className="group" onClick={clickItemHandler} role='button'>
             <hr className='bg-accent'/>
             <div className={`timeline-start md:text-end border-8 border-[#0e1022] rounded-lg hover:bg-accent hover:border-accent`} id='exp-details'>
-                <time className="font-mono italic">{ISOtoCustomDateString(exp.time_span[0])} - {exp.time_span[1] ? ISOtoCustomDateString(exp.time_span[1]) : 'Present'}</time>
-                <h3 className="text-lg font-black mt-2 whitespace-pre-line ">{exp.job_title}</h3>
+                <time className="font-mono italic">{DatetoCustomString(exp.time_span[0])} - {exp.time_span[1] ? DatetoCustomString(exp.time_span[1]) : 'Present'}</time>
+                <h2 className="text-lg font-black mt-2 whitespace-pre-line ">{exp.job_title}</h2>
                 <div className='h-full overflow-y-hidden'>
                     <motion.div id={`exp-${idx}`}
                      initial={{marginTop: EXP_MARGIN}}>
@@ -148,7 +144,7 @@ function TimelineCompactItem({exp, idx, clickItemHandler, animation_margins}: Ti
                         {exp.skills && <div className='pt-6'>
                             <h2 className="text-lg font-black mt-2 mx-2 text-secondary text-center">Skills Used</h2>
                             <div className={`flex flex-wrap justify-center`}>
-                                {exp.skills.map((s, idx) => <div className="bg-accent rounded-xl p-2 m-1" key={idx}>{s}</div>)}
+                                {exp.skills.map((s, idx) => <div className="bg-accent rounded-xl p-2 m-1 capitalize" key={idx}>{s}</div>)}
                             </div>
                         </div>}
                     </motion.div>
@@ -188,12 +184,10 @@ function Error(){
     )
 }
 
-// TODO: update for Firebase, simply returns input string for now
-function ISOtoCustomDateString(isoString: string){
-    const months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
-
-    // const d = new Date(isoString);
-    // return `${months[d.getMonth()]} ${d.getFullYear()}`
-
-    return isoString;
+function DatetoCustomString(date: Date){
+    return date.toLocaleString('en-US', {
+        month: 'long',
+        year: 'numeric',
+        timeZone: 'UTC'
+    });
 }

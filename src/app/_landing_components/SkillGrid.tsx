@@ -1,5 +1,4 @@
-import GetSkillList from "../_qraphql/GetSkillList"
-import { skills } from "@/data/resume-data";
+import GetSkillList from "../_gets/GetSkillList"
 
 // types
 type SkillType = 'Web Dev' | 'Engineering' | 'Design' | 'Soft Skills' | 'Other';
@@ -20,8 +19,7 @@ type SkillCardProps = {
 }
 
 export default function SkillGrid(){
-    // const [data, loading, error] = GetSkillList()
-    let data = skills;
+    const [data, loading, error] = GetSkillList()
 
     return(
         <div className="skillgrid flex flex-col">
@@ -57,7 +55,7 @@ function SkillCard({ s_type, s_objs }: SkillCardProps){
             </div>
             <div className="flex flex-wrap justify-center gap-3 bg-gradient-to-b from-accent to-[#0e1022] p-5 py-12 rounded-md my-1">
                 {s_objs.map((s, idx) => (
-                    <div key={idx} className={`${profiency_border_cs[s.proficiency]} text-wrap p-1 px-7 bg-[var(--cs-background)]`}>{s.skill} </div>
+                    <div key={idx} className={`${profiency_border_cs[s.proficiency]} text-wrap p-1 px-7 bg-[var(--cs-background)] capitalize`}>{s.skill} </div>
                 ))}
             </div>
         </div>
