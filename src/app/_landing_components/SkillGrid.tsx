@@ -20,7 +20,9 @@ type SkillCardProps = {
 
 export default function SkillGrid(){
     const [data, loading, error] = GetSkillList()
-
+    
+    if(loading) return <Loader />
+    if(error) return <Error /> 
     return(
         <div className="skillgrid flex flex-col">
             {Object.entries(data as SkillTableData).map(([k,v], idx) => (
