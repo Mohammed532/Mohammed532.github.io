@@ -64,7 +64,7 @@ export default function GetSkillList(){
 
                     t_data[type]!.push({
                         id: doc.id,
-                        skill: doc.id.toUpperCase(),
+                        skill: doc.id,
                         proficiency
                     });
                 });

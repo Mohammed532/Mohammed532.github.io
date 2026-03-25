@@ -117,7 +117,7 @@ function TimelineFullItem({exp, idx, alternate, clickItemHandler, animation_marg
                 initial={alternate ? {marginRight: SKILL_MARGIN} : {marginLeft: SKILL_MARGIN}}>
                     <h2 className="text-lg font-black mt-2 mx-2 text-white">Skills Used</h2>
                     <div className={`flex flex-wrap ${alternate ? 'justify-end' : 'justify-start'}`}>
-                        {exp.skills.map((s, idx) => <div className="badge badge-accent badge-lg p6 m6" key={idx}>{s}</div>)}
+                        {exp.skills.map((s, idx) => <div className="badge badge-accent badge-lg p6 m6 capitalize" key={idx}>{s}</div>)}
                     </div>
                 </motion.div>}
             </div>
@@ -141,7 +141,7 @@ function TimelineCompactItem({exp, idx, clickItemHandler, animation_margins}: Ti
                         {exp.skills && <div className='pt-6'>
                             <h2 className="text-lg font-black mt-2 mx-2 text-secondary text-center">Skills Used</h2>
                             <div className={`flex flex-wrap justify-center`}>
-                                {exp.skills.map((s, idx) => <div className="bg-accent rounded-xl p-2 m-1" key={idx}>{s}</div>)}
+                                {exp.skills.map((s, idx) => <div className="bg-accent rounded-xl p-2 m-1 capitalize" key={idx}>{s}</div>)}
                             </div>
                         </div>}
                     </motion.div>

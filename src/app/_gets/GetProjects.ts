@@ -1,19 +1,15 @@
+'use client'
+
 import { useState, useEffect, useContext } from "react"
-import { ApolloError, useQuery } from "@apollo/client"
-import _, { omit } from 'underscore'
-import ImageHostContext from "../_context/ImageHostContext"
-import { collection, getDocs } from "firebase/firestore";
-import { FirebaseError } from "firebase/app";
+import { query, collection, getDocs, orderBy, DocumentReference } from "firebase/firestore";
 import FSContext from "../_context/FirebaseContext";
 
 type LinkType = 'demo' | 'design' | 'code' | 'clips'
 type ProjectsTableData = {
     id: string
     img: {
-        alt: string | null,
+        alt: string | undefined,
         url: string,
-        width: number,
-        height: number
     } | null
     title: string // project name
     description: string // description of project
@@ -22,26 +18,61 @@ type ProjectsTableData = {
 }
 
 // TODO: Fix meaningless ts errors
-export default function GetProjects(): [ProjectsTableData[], boolean, FirebaseError | undefined] {
+export default function GetProjects(): [ProjectsTableData[] | undefined | null, boolean, Error | undefined | null] {
     const fs = useContext(FSContext);
 
-    const imageHostUrl = useContext(ImageHostContext);
-    const [pr_data, setData] = useState<ProjectsTableData[]>([]);
+    const [pr_data, setData] = useState<ProjectsTableData[] | undefined | null>(undefined);
     const [pr_loading, setLoading] = useState<boolean>(true);
-    const [pr_error, setError] = useState<FirebaseError | undefined>(undefined);
-
-    // formatted data for better handling
-    let t_data: ProjectsTableData[] = [];
+    const [pr_error, setError] = useState<Error | undefined | null>(undefined);
 
     useEffect(() => {
         const readfs = async() => {
             try {
-                const projSnap = getDocs(collection(fs.fstore, 'projects'));
-                console.log(projSnap)
-            } catch (error) {
+                let t_data: ProjectsTableData[] = [];
+                const projSnap = await getDocs(query(
+                    collection(fs.fstore, 'projects'),
+                    orderBy('gridSort', 'asc')
+                ));
+
+                // throw error if query return empty
+                if (projSnap.empty) {throw new Error('Failed data read: Query returned empty')};
                 
+                //format data and place in table (t_data)
+                projSnap.forEach(doc => {
+                    let data = doc.data();
+                    let skills = data.skills.map((sref: DocumentReference) => sref.id);
+
+                    t_data.push({
+                        id: data.gridSort,
+                        img: {
+                            alt: data.imgAlt,
+                            url: data.imgLink
+                        },
+                        title: doc.id,
+                        description: data.description,
+                        skills: skills,
+                        links: data.links
+                    });
+                });
+
+                setData(t_data);
+                setError(null);
+                setLoading(false);
+
+            } catch (err: unknown) {
+                if(err instanceof Error){
+                    console.error(err);
+                    setError(err);
+                } else {
+                    let e = new Error("Uknown error was thrown");
+                    console.error(e);
+                    setError(e);
+                }
+                setData(null);
+                setLoading(false);
             }
         }
+        readfs();
     }, [])
 
     return [pr_data, pr_loading, pr_error];

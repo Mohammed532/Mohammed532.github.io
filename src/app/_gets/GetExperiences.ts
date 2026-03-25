@@ -29,9 +29,6 @@ export default function GetExperiences(){
                     orderBy('startDate', 'asc')
                 ));
 
-                console.log(expSnap.size);
-                
-                            
                 // throw error if query return empty
                 if (expSnap.empty) {throw new Error('Failed data read: Query returned empty')};
                 
