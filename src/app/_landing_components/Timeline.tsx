@@ -19,7 +19,6 @@ type TimelineItemProp = {
 
 export default function Timeline() {
     const [data, loading, error] = GetExperiences();
-    
     const [selectedId, setSelectedId] = useState<string[]>([]);
     const [scope, animate] = useAnimate();
     let {width} = useWindowDimensions();
@@ -27,14 +26,12 @@ export default function Timeline() {
     // ANIMATION CONSTANTS
     const EXP_MARGIN = '-900%';
     const SKILL_MARGIN = '-900%';
-    const OPEN_DUR = 1;
-    const CLOSE_DUR = 1;
 
     // MD DEVICE WIDTH
     const MD_WIDTH = 767;
 
-    // if (loading) return <Loader/>
-    // if (error) return <Error />
+    if (loading) return <Loader />
+    if (error) return <Error />
 
     const selectItem: React.MouseEventHandler<HTMLLIElement> = (e) => {
         const id = e.currentTarget.id
@@ -48,18 +45,18 @@ export default function Timeline() {
         if (!selectedId.includes(id)){
             //open animation
             sequence = [
-                [`#exp-${id}`, { marginTop: '0%' }, {type: 'spring', duration: OPEN_DUR, bounce: 0.1}],
-                [`#s-${id}`, skill_side[parseInt(id)%2].open, {type: 'spring', duration: OPEN_DUR, bounce: 0.1}]
+                [`#exp-${id}`, { marginTop: '0%' }, {type: 'spring', duration: 1, bounce: 0.2}],
+                [`#s-${id}`, skill_side[parseInt(id)%2].open, {type: 'spring', duration: 1, bounce: 0.2}]
             ]
             animate(sequence)
             setSelectedId(prev => [...prev, id])
         } else {
             // close animation
             sequence = [
-                [`#s-${id}`, skill_side[parseInt(id)%2].close, {type: 'spring', duration: CLOSE_DUR}],
-                [`#exp-${id}`, { marginTop: EXP_MARGIN }, {type: 'spring', duration: CLOSE_DUR }]
+                [`#s-${id}`, skill_side[parseInt(id)%2].close, {type: 'spring', duration: 0.3}],
+                [`#exp-${id}`, { marginTop: EXP_MARGIN }, {type: 'spring', duration: 0.3 }]
             ]
-            animate(sequence, {duration: CLOSE_DUR - 0.1})
+            animate(sequence)
             setSelectedId(prev => prev.filter(pid => pid !== id))
         }
 

@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from "framer-motion" 
+import { motion, useInView } from "framer-motion" 
+import { useRef } from "react"
 import GetProjects, { ProjectsTableData } from '@/app/_gets/GetProjects'
 
 // types for props
@@ -35,7 +36,7 @@ export default function ProjectGrid(){
     
     return (
         <div className={`flex flex-col justify-center ${GAP} md:flex-row`}>
-            <div className={`flex flex-col justify-center ${GAP} md:justify-start`}>
+            <div className={`flex flex-col ${GAP} md:justify-start`}>
                 {p_col_1.map(p => (
                     <ProjectCard key={p.id} project={p} side='left'/>
                 ))}
@@ -51,14 +52,22 @@ export default function ProjectGrid(){
 }
 
 function ProjectCard({ project, side }: ProjectCardProps){
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: false });
+
     return (
-        <motion.div className={`card bg-accent shadow-xl max-w-96`}
-         initial={side === 'right' ? { opacity: 0, x: 200 } : {opacity: 0, x: -200}}
-         whileInView={{ opacity: 1, x: 0 }}
+        <motion.div className={`card bg-accent shadow-xl max-w-96 will-change-transform`}
+         ref={ref}
+         initial={{ opacity: 0, x: side === 'right' ? 200 : -200 }}
+         animate={isInView ? { opacity: 1, x: 0 } : {}}
          transition={{ duration: 0.6 }}
         >
-            <figure>
-                <img src={project.img?.url || 'project-imgs/project-default.jpg'} alt={project.img?.alt} />
+            <figure className="h-200 overflow-hidden">
+                <img
+                  className="w-full h-full object-cover" 
+                  src={project.img?.url || 'project-imgs/project-default.jpg'} 
+                  alt={project.img?.alt} 
+                />
             </figure>
             <div className="card-body">
                 <h2 className="class-title text-white">{project.title}</h2>

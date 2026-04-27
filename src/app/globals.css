@@ -1,6 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "night";  
+  default: true;
+  --color-primary: #ffffff;
+  --color-secondary: #19abff;
+  --color-accent: #152847;
+  --color-base-100: #0e1022;
+};
+
+[data-theme="night"] {
+  .badge {
+    margin: 0.3rem 0.5rem;
+    border-radius: 10px; 
+  }
+  .badge-lg {
+    padding: 1rem 2rem;
+  }
+}
+
 
 @property --angle {
   syntax: "<angle>";

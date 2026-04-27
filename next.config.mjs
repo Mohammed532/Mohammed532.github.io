@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    // current project is using webpack, empty turbopack object to silence error
+    turbopack: {},
     webpack(config) {
         // Grab the existing rule that handles SVG imports
         const fileLoaderRule = config.module.rules.find((rule) =>
@@ -29,6 +31,7 @@ const nextConfig = {
       },
     // basePath: '/portfolio-2024',
     output: 'export',
+
 };
 
 export default nextConfig;
