@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { motion, useAnimate, stagger, useScroll, useInView} from "framer-motion"
-import { skills, experience, projects } from "@/data/resume-data"
 import { ReactSVG } from "react-svg"
 
 import { 
@@ -58,12 +57,21 @@ export default function Home() {
                 <Toast text="Scroll Down For More!" duration={6} showFn={handleToast}/>
             </section>
             <section className="flex py-10 flex-col justify-center content-center items-center md:flex-row">
-                <div className="my-10 relative glow-border z-[1] mx-10 ">
+                <div className="m-10 hover-3d">
                     <img 
                     src='portfolio-headshot.jpg' 
                     alt="Headshot of Mohammed Akinbayo. And yes, he is quite good looking" 
                     width={256} height={256}
-                    className="shadow-xl rounded-md relative z-[1]"/>
+                    className="shadow-xl rounded-md relative z-1"/>
+                      {/* 8 empty divs needed for the 3D effect */}
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
                 </div>
                 <div className="md:w-1/3 md:mx-10">
                     <h2>About Me</h2>

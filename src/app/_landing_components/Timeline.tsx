@@ -94,7 +94,7 @@ export default function Timeline() {
 function TimelineFullItem({exp, idx, alternate, clickItemHandler, animation_margins}: TimelineItemProp) {
     let {EXP_MARGIN, SKILL_MARGIN} = animation_margins
     return (
-        <li key={idx} id={`${idx}`} className="group" onClick={clickItemHandler} role='button'>
+        <li key={idx} id={`${idx}`} className="group cursor-pointer" onClick={clickItemHandler} role='button'>
             <hr className='bg-accent'/>
             <div className={`${alternate ? 'timeline-end' : 'timeline-start md:text-end'} border-8 border-[#0e1022] rounded-lg hover:bg-accent hover:border-accent`} id='exp-details'>
                 <time className="font-mono italic">{DatetoCustomString(exp.time_span[0])} - {exp.time_span[1] ? DatetoCustomString(exp.time_span[1]) : 'Present'}</time>

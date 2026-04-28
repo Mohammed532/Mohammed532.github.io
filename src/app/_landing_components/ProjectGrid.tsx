@@ -62,7 +62,7 @@ function ProjectCard({ project, side }: ProjectCardProps){
          animate={isInView ? { opacity: 1, x: 0 } : {}}
          transition={{ duration: 0.6 }}
         >
-            <figure className="h-200 overflow-hidden">
+            <figure className="overflow-hidden">
                 <img
                   className="w-full h-full object-cover" 
                   src={project.img?.url || 'project-imgs/project-default.jpg'} 
@@ -82,7 +82,7 @@ function ProjectCard({ project, side }: ProjectCardProps){
                     {Object.entries(project.links)
                      .sort(([kA], [kB]) => kA.localeCompare(kB)) // sort by key
                      .map(([k,v]) => (
-                        <a key={k} href={v} className="uppercase text-secondary hover:text-[--cs-background] mx-5">{k}</a>
+                        <a key={k} href={v} className="uppercase text-secondary hover:text-(--cs-background) mx-5">{k}</a>
                     ))}
                 </div>
                 </>

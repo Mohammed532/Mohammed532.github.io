@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 import Providers from "./providers"
 import { space_mono } from "@/styles/fonts";
 import "./globals.css";
@@ -21,7 +20,7 @@ export default function RootLayout({
 }>) {
 
   return (
-    <html lang="en" data-theme='night'>
+    <html lang="en" data-theme='night' suppressHydrationWarning>
       <body className={space_mono.className}>
         <Providers>
           {children}
