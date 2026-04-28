@@ -12,8 +12,8 @@ type TimelineItemProp = {
     alternate: boolean,
     clickItemHandler: React.MouseEventHandler<HTMLLIElement>,
     animation_margins: {
-        EXP_MARGIN: string,
-        SKILL_MARGIN: string
+        EXP_MARGIN: number,
+        SKILL_MARGIN: number
     }
 }
 
@@ -24,8 +24,8 @@ export default function Timeline() {
     let {width} = useWindowDimensions();
 
     // ANIMATION CONSTANTS
-    const EXP_MARGIN = '-900%';
-    const SKILL_MARGIN = '-900%';
+    const EXP_MARGIN = -900;
+    const SKILL_MARGIN = 900; // if moving left, multiply -1
 
     // MD DEVICE WIDTH
     const MD_WIDTH = 767;
@@ -35,26 +35,29 @@ export default function Timeline() {
 
     const selectItem: React.MouseEventHandler<HTMLLIElement> = (e) => {
         const id = e.currentTarget.id
+        const contentHeight = document.getElementById(`exp-${id}`)?.scrollHeight ?? 0;
         let sequence: AnimationSequence
 
         const skill_side = [
-            {open: {marginLeft: '0%'}, close: {marginLeft: SKILL_MARGIN}},
-            {open: {marginRight: '0%'}, close: {marginRight: SKILL_MARGIN}}
+            {open: {x: 0}, close: {x: -1*SKILL_MARGIN}},
+            {open: {x: 0}, close: {x: SKILL_MARGIN}}
         ]
         
         if (!selectedId.includes(id)){
             //open animation
             sequence = [
-                [`#exp-${id}`, { marginTop: '0%' }, {type: 'spring', duration: 1, bounce: 0.2}],
-                [`#s-${id}`, skill_side[parseInt(id)%2].open, {type: 'spring', duration: 1, bounce: 0.2}]
+                [`#pdiv-${id}`, {height: `${contentHeight}px`}, {at: 0, type: 'tween', duration: 1, ease: [0.22, 1, 0.36, 1]}],
+                [`#exp-${id}`, { y: 0, opacity: 100 }, {at: 0, type: 'tween', duration: 1, ease: [0.22, 1, 0.36, 1]}],
+                [`#s-${id}`, skill_side[parseInt(id)%2].open, {at: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1]}]
             ]
             animate(sequence)
             setSelectedId(prev => [...prev, id])
         } else {
             // close animation
             sequence = [
-                [`#s-${id}`, skill_side[parseInt(id)%2].close, {type: 'spring', duration: 0.3}],
-                [`#exp-${id}`, { marginTop: EXP_MARGIN }, {type: 'spring', duration: 0.3 }]
+                [`#s-${id}`, skill_side[parseInt(id)%2].close, {at: 0, type: 'tween', duration: 1, ease: [0.22, 1, 0.36, 1]}],
+                [`#exp-${id}`, { y: EXP_MARGIN, opacity: 0}, {at: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1]}],
+                [`#pdiv-${id}`, {height: 0}, {at: 0.3, type: 'tween', duration: 1, ease: [0.22, 1, 0.36, 1]}]
             ]
             animate(sequence)
             setSelectedId(prev => prev.filter(pid => pid !== id))
@@ -94,17 +97,21 @@ export default function Timeline() {
 function TimelineFullItem({exp, idx, alternate, clickItemHandler, animation_margins}: TimelineItemProp) {
     let {EXP_MARGIN, SKILL_MARGIN} = animation_margins
     return (
-        <li key={idx} id={`${idx}`} className="group cursor-pointer" onClick={clickItemHandler} role='button'>
+        <li 
+          key={idx} 
+          id={`${idx}`} 
+          className="group cursor-pointer" 
+          onClick={clickItemHandler} role='button'>
             <hr className='bg-accent'/>
             <div className={`${alternate ? 'timeline-end' : 'timeline-start md:text-end'} border-8 border-[#0e1022] rounded-lg hover:bg-accent hover:border-accent`} id='exp-details'>
                 <time className="font-mono italic">{DatetoCustomString(exp.time_span[0])} - {exp.time_span[1] ? DatetoCustomString(exp.time_span[1]) : 'Present'}</time>
                 <h2 className="text-lg font-black mt-2 whitespace-pre-line">{exp.job_title}</h2>
-                <div className='h-full overflow-y-hidden'>
+                <motion.div id={`pdiv-${idx}`} initial={{height: 0}} className='overflow-y-hidden'>
                     <motion.p id={`exp-${idx}`}
-                    initial={{marginTop: EXP_MARGIN}}>
+                    initial={{y: EXP_MARGIN, opacity: 0}}>
                         {exp.job_description}
                     </motion.p>
-                </div>
+                </motion.div>
             </div>
             <div className="timeline-middle">
                 <svg width="20" xmlns="http://www.w3.org/2000/svg" height="20" fill="currentColor">
@@ -114,7 +121,7 @@ function TimelineFullItem({exp, idx, alternate, clickItemHandler, animation_marg
             <div className={`${alternate ? 'timeline-start md:text-end' : 'timeline-end'} w-full overflow-x-hidden`} id='skill-details'>
                 {/* only show skills if skills exist in data */}
                 {exp.skills && <motion.div id={`s-${idx}`} 
-                initial={alternate ? {marginRight: SKILL_MARGIN} : {marginLeft: SKILL_MARGIN}}>
+                initial={alternate ? {x: SKILL_MARGIN} : {x: -1*SKILL_MARGIN}}>
                     <h2 className="text-lg font-black mt-2 mx-2 text-white">Skills Used</h2>
                     <div className={`flex flex-wrap ${alternate ? 'justify-end' : 'justify-start'}`}>
                         {exp.skills.map((s, idx) => <div className="badge badge-accent badge-lg p6 m6 capitalize" key={idx}>{s}</div>)}
@@ -136,7 +143,7 @@ function TimelineCompactItem({exp, idx, clickItemHandler, animation_margins}: Ti
                 <h2 className="text-lg font-black mt-2 whitespace-pre-line ">{exp.job_title}</h2>
                 <div className='h-full overflow-y-hidden'>
                     <motion.div id={`exp-${idx}`}
-                     initial={{marginTop: EXP_MARGIN}}>
+                     initial={{y: EXP_MARGIN}}>
                         <p>{exp.job_description}</p>
                         {exp.skills && <div className='pt-6'>
                             <h2 className="text-lg font-black mt-2 mx-2 text-secondary text-center">Skills Used</h2>
