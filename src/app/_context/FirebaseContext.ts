@@ -8,11 +8,12 @@ const firebaseConfig = {
   authDomain: process.env.NEXT_PUBLIC_FB_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FB_PROJECT_ID,
   storageBucket: process.env.NEXT_PUBLIC_FB_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FB_MESSENGING_SENDER_ID,
+  messagingSenderId: process.env.NEXT_PUBLIC_FB_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FB_APP_ID,
 };
 
 // Initialize Firebase
+console.log(firebaseConfig)
 const app = initializeApp(firebaseConfig);
 const fstore = getFirestore(app);
 
