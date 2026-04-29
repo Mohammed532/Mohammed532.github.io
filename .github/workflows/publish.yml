@@ -81,7 +81,7 @@ jobs:
         env: 
           LAST_UPDATE: ${{ env.LAST_UPDATE }}
 
-          NEXT_PUBLIC_FB_API_KEY: ${{ secrets.NEXT_PUBLIC_FB_API_KEY }}
+          NEXT_PUBLIC_FB_API_KEY: ${{ vars.NEXT_PUBLIC_FB_API_KEY }}
           NEXT_PUBLIC_FB_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_FB_AUTH_DOMAIN }}
           NEXT_PUBLIC_FB_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FB_PROJECT_ID }}
           NEXT_PUBLIC_FB_STORAGE_BUCKET: ${{ secrets.NEXT_PUBLIC_FB_STORAGE_BUCKET }}
