@@ -97,9 +97,6 @@ jobs:
           echo "NEXT_PUBLIC_FB_STORAGE_BUCKET=$NEXT_PUBLIC_FB_STORAGE_BUCKET" >> .env
           echo "NEXT_PUBLIC_FB_MESSAGING_SENDER_ID=$NEXT_PUBLIC_FB_MESSAGING_SENDER_ID" >> .env
           echo "NEXT_PUBLIC_FB_APP_ID=$NEXT_PUBLIC_FB_APP_ID" >> .env
-
-          echo "---- ENV DEBUG ----"
-          echo "API KEY LENGTH: ${#NEXT_PUBLIC_FB_API_KEY}"
           ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
