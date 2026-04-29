@@ -89,7 +89,6 @@ jobs:
           NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
         run: | 
           echo "Injecting LAST_UPDATE into the build"
-          echo "NEXT_PUBLIC_LAST_UPDATE=${{ env.LAST_UPDATE }}" >> .env
           ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
