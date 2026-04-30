@@ -141,9 +141,9 @@ function TimelineCompactItem({exp, idx, clickItemHandler, animation_margins}: Ti
             <div className={`timeline-start md:text-end border-8 border-[#0e1022] rounded-lg hover:bg-accent hover:border-accent`} id='exp-details'>
                 <time className="font-mono italic">{DatetoCustomString(exp.time_span[0])} - {exp.time_span[1] ? DatetoCustomString(exp.time_span[1]) : 'Present'}</time>
                 <h2 className="text-lg font-black mt-2 whitespace-pre-line ">{exp.job_title}</h2>
-                <div className='h-full overflow-y-hidden'>
+                <motion.div id={`pdiv-${idx}`} initial={{height: 0}} className='overflow-y-hidden'>
                     <motion.div id={`exp-${idx}`}
-                     initial={{y: EXP_MARGIN}}>
+                     initial={{y: EXP_MARGIN, opacity: 0}}>
                         <p>{exp.job_description}</p>
                         {exp.skills && <div className='pt-6'>
                             <h2 className="text-lg font-black mt-2 mx-2 text-secondary text-center">Skills Used</h2>
@@ -152,7 +152,7 @@ function TimelineCompactItem({exp, idx, clickItemHandler, animation_margins}: Ti
                             </div>
                         </div>}
                     </motion.div>
-                </div>
+                </motion.div>
             </div>
             <div className="timeline-middle">
                 <svg width="20" xmlns="http://www.w3.org/2000/svg" height="20" fill="currentColor">
