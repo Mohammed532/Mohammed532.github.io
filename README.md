@@ -1,3 +1,3 @@
-# Mohammed Akinbayo's Portfolio Website (2024)
+# Mohammed Akinbayo's Portfolio Website
 
- This is an updated version of my portfolio site, created using Next.js (Will implement Strapi backend for CMS content in the very near future.)
+ This is an updated version of my portfolio site, created using Next.js and Firebase
