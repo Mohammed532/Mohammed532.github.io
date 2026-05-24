@@ -36,7 +36,14 @@ yarn-error.log*
 next-env.d.ts
 
 #environment
+*.log
 .env
+.env.local
 
 #dev notes
 devnote.md
+
+# private scripts
+scripts/*.ts
+scripts/*.js
+scripts/*.json

@@ -28,7 +28,8 @@
       "@/fonts": [
         "./src/styles/fonts"
       ]
-    }
+    },
+    "target": "ES2017"
   },
   "include": [
     "svgr.d.ts",
