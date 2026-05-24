@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth, setPersistence, browserSessionPersistence } from "firebase/auth";
 import { createContext } from "react";
 
 // Firebase Configuration
@@ -15,8 +16,10 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const fstore = getFirestore(app);
+const auth = getAuth(app);
+setPersistence(auth, browserSessionPersistence);
 
-const fs = {fstore: fstore};
+const fs = {fstore: fstore, auth: auth};
 const FSContext = createContext(fs);
 
 export default FSContext;
