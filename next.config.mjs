@@ -29,6 +29,7 @@ const nextConfig = {
     
         return config
       },
+
     // basePath: '/portfolio-2024',
     output: 'export',
 

@@ -29,8 +29,6 @@ export default function AdminGaurdLayout({ children }: { children: React.ReactNo
                 const isAdmin = TOKEN?.claims.admin === true;
                 await currentUser.getIdToken(true);
 
-                console.log(TOKEN);
-
                 // admin login page auth check
                 if(pathname === '/admin'){
                     if(isAdmin) {
@@ -52,7 +50,12 @@ export default function AdminGaurdLayout({ children }: { children: React.ReactNo
         }, [fs.auth, pathname, router]);
 
     if(loading) {
-        return <p>Loading...</p>
+        return(
+            <div className="flex flex-col gap-4 h-screen items-center justify-center">
+                <span className="loading loading-spinner loading-xl text-secondary"></span>
+                <p className="text-xs">Loading Admin Page...</p>
+            </div>
+        ) 
     }  
     
     return children;
