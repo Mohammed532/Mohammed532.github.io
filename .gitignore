@@ -40,3 +40,6 @@ next-env.d.ts
 
 #dev notes
 devnote.md
+
+# ignoring scripts folder for now
+/scripts
