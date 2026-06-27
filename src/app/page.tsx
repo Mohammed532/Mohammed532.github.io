@@ -45,8 +45,8 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col items-center px-22 md:basis-1/2">
                     <ReactSVG src="./portfolio-molybdenum.svg" className="min-h-[300px] w-[300px] md:min-h-[400px] md:w-[400px]" />
-                    <p className="md:w-full md:text-lg">Hehe, get it? <span className="emphasis">Mo?</span> Like the <span className="emphasis">element?</span></p>
-                    <p className="md:w-full md:text-lg">Anyways here&apos;s my contact info</p>
+                    {/* <p className="md:w-full md:text-lg">Hehe, get it? <span className="emphasis">Mo?</span> Like the <span className="emphasis">element?</span></p>
+                    <p className="md:w-full md:text-lg">Anyways here&apos;s my contact info</p> */}
                     <div className="md:w-full divider divider-accent"></div>
                     <ContactList contacts={{
                         LinkedIn: 'https://www.linkedin.com/in/mohammed-akinbayo/',
@@ -61,7 +61,7 @@ export default function Home() {
                     <img 
                     src='portfolio-headshot.jpg' 
                     alt="Headshot of Mohammed Akinbayo. And yes, he is quite good looking" 
-                    width={256} height={256}
+                    width={300} height={300}
                     className="shadow-xl rounded-md relative z-1"/>
                       {/* 8 empty divs needed for the 3D effect */}
                         <div></div>
@@ -73,18 +73,14 @@ export default function Home() {
                         <div></div>
                         <div></div>
                 </div>
-                <div className="md:w-1/3 md:mx-10">
+                <div className="md:w-1/2 md:mx-10">
                     <h2>About Me</h2>
-                    <p>I&apos;m a <span className="emphasis">Howard University</span> student, 
-                        working towards my B.S. in Computer Engineering. I have a wide 
-                        arrange of interests, including <span className="emphasis">AI/ML</span>, 
-                        <span className="emphasis">Frontend Developement</span>, <span className="emphasis">IoT</span> 
-                        , <span className="emphasis">Robotics</span>, and much more. I have used my skills and interests to 
-                        do exceptional work at <span className="emphasis">NASA</span>, <span className="emphasis">Apple</span>, <span className="emphasis">CoStar Group</span>,
-                        and <span className="emphasis">Northrop Grumman</span>. I&apos;m hoping to 
-                        grow my skills and continue my learning. I believe that the pursuit of 
-                        knowledge is a lifelong journey, so please let me show you the 
-                        fruits of that journey!
+                    <p>
+                        I'm a recent <span className="emphasis">Howard University</span> graduate with a <span className="emphasis">B.S. in Computer Engineering</span>, specializing in both <span className="emphasis">full-stack web development</span> and <span className="emphasis">embedded systems programming</span>. I enjoy building software across the entire stack—from modern, responsive web applications to firmware and robotics systems. My experience spans <span className="emphasis">AI</span>, <span className="emphasis">IoT</span>, <span className="emphasis">robotics</span>, and <span className="emphasis">scalable web technologies</span>, giving me the flexibility to solve problems wherever hardware and software intersect.
+                    </p>
+                    <p className="mt-5">
+                       I've had the opportunity to apply these skills through internships at <span className="emphasis">NASA</span>, <span className="emphasis">Apple</span>, <span className="emphasis">CoStar Group</span>, and <span className="emphasis">Northrop Grumman</span>, working on projects ranging from <span className="emphasis">frontend engineering</span> and <span className="emphasis">AR/VR</span> to <span className="emphasis">AI</span> and <span className="emphasis">embedded systems</span>. I'm driven by curiosity and a commitment to lifelong learning, always looking for new challenges and opportunities to build impactful technology.
+                        I enjoy solving complex problems across the entire technology stack.
                     </p>
                 </div>
             </section>
