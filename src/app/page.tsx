@@ -61,7 +61,7 @@ export default function Home() {
                     <img 
                     src='portfolio-headshot.jpg' 
                     alt="Headshot of Mohammed Akinbayo. And yes, he is quite good looking" 
-                    width={300} height={300}
+                    width={326} height={326}
                     className="shadow-xl rounded-md relative z-1"/>
                       {/* 8 empty divs needed for the 3D effect */}
                         <div></div>
@@ -80,7 +80,8 @@ export default function Home() {
                     </p>
                     <p className="mt-5">
                        I've had the opportunity to apply these skills through internships at <span className="emphasis">NASA</span>, <span className="emphasis">Apple</span>, <span className="emphasis">CoStar Group</span>, and <span className="emphasis">Northrop Grumman</span>, working on projects ranging from <span className="emphasis">frontend engineering</span> and <span className="emphasis">AR/VR</span> to <span className="emphasis">AI</span> and <span className="emphasis">embedded systems</span>. I'm driven by curiosity and a commitment to lifelong learning, always looking for new challenges and opportunities to build impactful technology.
-                        I enjoy solving complex problems across the entire technology stack.
+                        I enjoy solving complex problems across the entire technology stack. Please, take a look, and let me show you the 
+                        fruits of my journey!
                     </p>
                 </div>
             </section>

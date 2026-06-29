@@ -5,7 +5,7 @@ import FSContext from "../_context/FirebaseContext";
 import { collection, getDocs } from "firebase/firestore";
 import { PROFICIENCY_ORDER } from "@/data/constants";
 
-type SkillType = 'Web Dev' | 'Engineering' | 'Design' | 'Soft Skills' | 'Other';
+type SkillType = 'Full-Stack Development' | 'Embedded Systems & Robotics' | 'Hardware & Systems' | 'Tools & Platforms';
 type SkillProficiency = 'advanced' | 'intermediate' | 'novice';
 type SkillTableData = {
     [S in SkillType]?: {
@@ -41,7 +41,12 @@ export default function GetSkillList(){
         const readfs = async() => {
             try {
                 // formatted data for better handling
-                let t_data: SkillTableData = {}; // tabelurized data
+                let t_data: SkillTableData = {
+                    'Full-Stack Development': [],
+                    'Embedded Systems & Robotics': [],
+                    'Hardware & Systems': [],
+                    'Tools & Platforms': []
+                }; // tabelurized data
                 const skillSnap = await getDocs(collection(fs.fstore, 'skills'));
     
                 // throw error if query return empty
