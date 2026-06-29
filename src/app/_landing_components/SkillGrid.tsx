@@ -1,7 +1,7 @@
 import GetSkillList from "../_gets/GetSkillList"
 
 // types
-type SkillType = 'Web Dev' | 'Engineering' | 'Design' | 'Soft Skills' | 'Other';
+type SkillType = 'Full-Stack Development' | 'Embedded Systems & Robotics' | 'Hardware & Systems' | 'Tools & Platforms';
 
 type Skill = {
     id: number,
@@ -48,8 +48,8 @@ function SkillCard({ s_type, s_objs }: SkillCardProps){
     return(
         <div className="mb-16 md:w-5/6 self-center">
             <div className="flex justify-between">
-                <p className="italic text-secondary">{s_type}</p>
-                <div className="hidden md:flex justify-self-stretch gap-5">
+                <p className="italic text-secondary text-left">{s_type}</p>
+                <div className="hidden md:flex justify-self-stretch gap-5 text-sm align-middle">
                     <p className={`${profiency_text_cs.advanced}`}>ADVANCED</p>
                     <p className={`${profiency_text_cs.intermediate}`}>INTERMEDIATE</p>
                     <p className={`${profiency_text_cs.novice}`}>NOVICE</p>
@@ -57,7 +57,7 @@ function SkillCard({ s_type, s_objs }: SkillCardProps){
             </div>
             <div className="flex flex-wrap justify-center gap-3 bg-linear-to-b from-accent to-[#0e1022] p-5 py-12 rounded-md my-1">
                 {s_objs.map((s, idx) => (
-                    <div key={idx} className={`${profiency_border_cs[s.proficiency]} text-wrap p-1 px-7 bg-(--cs-background) capitalize`}>{s.skill} </div>
+                    <div key={idx} className={`${profiency_border_cs[s.proficiency]} text-wrap p-1 px-7 bg-(--cs-background) uppercase`}>{s.skill} </div>
                 ))}
             </div>
         </div>
