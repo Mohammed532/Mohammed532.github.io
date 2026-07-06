@@ -76,12 +76,13 @@ export default function Home() {
                 <div className="md:w-1/2 md:mx-10">
                     <h2>About Me</h2>
                     <p>
-                        I'm a recent <span className="emphasis">Howard University</span> graduate with a <span className="emphasis">B.S. in Computer Engineering</span>, specializing in both <span className="emphasis">full-stack web development</span> and <span className="emphasis">embedded systems programming</span>. I enjoy building software across the entire stack—from modern, responsive web applications to firmware and robotics systems. My experience spans <span className="emphasis">AI</span>, <span className="emphasis">IoT</span>, <span className="emphasis">robotics</span>, and <span className="emphasis">scalable web technologies</span>, giving me the flexibility to solve problems wherever hardware and software intersect.
+                        I am a recent <span className="emphasis">Howard University</span> graduate with a <span className="emphasis">B.S. in Computer Engineering</span>. I specialize in both <span className="emphasis">full-stack web development</span> and <span className="emphasis">embedded systems</span>. In terms of programming, I am quite passionate about creating software solutions throughout the whole technology stack, from the most modern responsive web applications down to the firmware and robotics.
                     </p>
                     <p className="mt-5">
-                       I've had the opportunity to apply these skills through internships at <span className="emphasis">NASA</span>, <span className="emphasis">Apple</span>, <span className="emphasis">CoStar Group</span>, and <span className="emphasis">Northrop Grumman</span>, working on projects ranging from <span className="emphasis">frontend engineering</span> and <span className="emphasis">AR/VR</span> to <span className="emphasis">AI</span> and <span className="emphasis">embedded systems</span>. I'm driven by curiosity and a commitment to lifelong learning, always looking for new challenges and opportunities to build impactful technology.
-                        I enjoy solving complex problems across the entire technology stack. Please, take a look, and let me show you the 
-                        fruits of my journey!
+                        Thanks to my educational background and professional experience at <span className="emphasis">NASA</span>, <span className="emphasis">Apple</span>, <span className="emphasis">CoStar Group</span>, and <span className="emphasis">Northrop Grumman</span>, I have had a chance to gain valuable experience in AI, IoT, robotics, and scalable web technologies that allow me to find the most appropriate solution in places where hardware and software meet.
+                    </p>
+                    <p className="mt-5">
+                        I am heavily driven by my curiosity and passion, and I am eager to push myself in solving complicated tasks on the whole technology stack. I wish to learn continuously throughout my life, so please feel free to browse and see the fruits of my learning!
                     </p>
                 </div>
             </section>
