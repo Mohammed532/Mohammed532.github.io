@@ -43,12 +43,12 @@ export default function GetProjects(): [ProjectsTableData[] | undefined | null, 
                     let skills = data.skills.map((sref: DocumentReference) => sref.id);
 
                     t_data.push({
-                        id: data.gridSort,
+                        id: doc.id,
                         img: {
                             alt: data.imgAlt,
                             url: data.imgLink
                         },
-                        title: doc.id,
+                        title: data.name,
                         description: data.description,
                         skills: skills,
                         links: data.links
