@@ -43,7 +43,7 @@ export default function GetExperiences(){
                     t_data.push({
                         id: doc.id,
                         time_span: [sdate, edate],
-                        job_title: doc.id,
+                        job_title: data.name,
                         job_description: data.description,
                         skills: data.skills.map((ref: DocumentReference) => ref.id)
                     });
