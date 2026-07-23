@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion" 
 import { useRef } from "react"
+import Image from "next/image"
 import GetProjects, { ProjectsTableData } from '@/app/_gets/GetProjects'
 
 // types for props
@@ -54,39 +55,44 @@ export default function ProjectGrid(){
 function ProjectCard({ project, side }: ProjectCardProps){
     const ref = useRef(null);
     const isInView = useInView(ref, { once: false });
+    const DELTA = 100; 
 
     return (
-        <motion.div className={`card bg-accent shadow-xl max-w-96 will-change-transform`}
+        <motion.div className="will-change-transform transform-gpu"
          ref={ref}
-         initial={{ opacity: 0, x: side === 'right' ? 200 : -200 }}
-         animate={isInView ? { opacity: 1, x: 0 } : {}}
+         initial={{ opacity: 0, x: side === 'right' ? DELTA : -DELTA }}
+         animate={isInView ? { opacity: 1, x: 0 } : {opacity: 0, x: side === "right" ? DELTA : -DELTA}}
          transition={{ duration: 0.6 }}
         >
-            <figure className="overflow-hidden">
-                <img
-                  className="w-full h-full object-cover" 
-                  src={project.img?.url || 'project-imgs/project-default.jpg'} 
-                  alt={project.img?.alt} 
-                />
-            </figure>
-            <div className="card-body">
-                <h2 className="class-title text-white">{project.title}</h2>
-                <p>{project.description}</p>
-                <div className={`card-actions`}>
-                    {project.skills && project.skills.map((s, idx) => (<div className="badge badge-[--cs-background] p-3 capitalize" key={`ps-${idx}`}>{s}</div>))}
+            <div className="card bg-accent shadow-xl max-w-96">
+                <figure className="overflow-hidden">
+                    <Image
+                        className="w-full h-full object-cover" 
+                        src={project.img?.url || 'project-imgs/project-default.jpg'} 
+                        alt={project.img?.alt as string} 
+                        width={380}
+                        height={400}
+                    />
+                </figure>
+                <div className="card-body">
+                    <h2 className="class-title text-white">{project.title}</h2>
+                    <p>{project.description}</p>
+                    <div className={`card-actions`}>
+                        {project.skills && project.skills.map((s, idx) => (<div className="badge badge-[--cs-background] p-3 capitalize" key={`ps-${idx}`}>{s}</div>))}
+                    </div>
+                    {project.links && // only render if project.links exists
+                    <>
+                    <div className="divider divider-[--cs-background]">Links</div>
+                    <div className="flex flex-row flex-wrap">
+                        {Object.entries(project.links)
+                        .sort(([kA], [kB]) => kA.localeCompare(kB)) // sort by key
+                        .map(([k,v]) => (
+                            <a key={k} href={v} className="uppercase text-secondary hover:text-(--cs-background) mx-5">{k}</a>
+                        ))}
+                    </div>
+                    </>
+                    }
                 </div>
-                {project.links && // only render if project.links exists
-                <>
-                <div className="divider divider-[--cs-background]">Links</div>
-                <div className="flex flex-row flex-wrap">
-                    {Object.entries(project.links)
-                     .sort(([kA], [kB]) => kA.localeCompare(kB)) // sort by key
-                     .map(([k,v]) => (
-                        <a key={k} href={v} className="uppercase text-secondary hover:text-(--cs-background) mx-5">{k}</a>
-                    ))}
-                </div>
-                </>
-                }
             </div>
         </motion.div>
     )

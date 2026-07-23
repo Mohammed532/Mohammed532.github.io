@@ -32,6 +32,12 @@ const nextConfig = {
     // basePath: '/portfolio-2024',
     output: 'export',
 
+    // custom image loader for cloudinary
+    images: {
+        loader: 'custom',
+        loaderFile: './loaders/img-loader.ts',
+    },
+
 };
 
 export default nextConfig;
